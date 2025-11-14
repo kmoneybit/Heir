@@ -4,14 +4,12 @@
   padding: 0;
   box-sizing: border-box;
   font-family: system-ui;
-  overflow-x: hidden;
 }
 
+/* BODY — NO BACKGROUND IMAGE */
 body {
-  background: url(./image/hero-image.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* HEADER */
@@ -82,25 +80,24 @@ header {
   .navLinks {
     position: fixed;
     top: 0;
-    right: -350px; /* start hidden */
+    right: -350px; /* hidden */
     height: 100vh;
     width: 300px;
     background-color: #000;
     flex-direction: column;
     padding: 5rem 2rem;
     transition: 0.5s ease;
-    z-index: 900; /* under hamburger, above page */
+    z-index: 900;
     gap: 2rem;
   }
 
   .navLinks.active {
-    right: 0; /* slides in here */
+    right: 0; /* slide-in */
   }
 
-  /* Show hamburger icon */
   .ham_div {
     display: block;
-    z-index: 1000; /* ALWAYS on top */
+    z-index: 1000;
   }
 
   .ham_icon {
@@ -108,16 +105,29 @@ header {
     filter: invert(100%);
     cursor: pointer;
     position: relative;
-    z-index: 1001; /* highest element */
+    z-index: 1001;
+  }
+
+  .product-dispaly {
+    flex-direction: column;
+    padding: 0rem;
+  }
+  .product-text {
+    width: 100%;
   }
 }
 
-/* HERO SECTION */
+/* HERO SECTION — BACKGROUND IMAGE ONLY HERE */
 .heroSection {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-image: url("./image/hero-image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero-text {
@@ -160,7 +170,6 @@ header {
   font-weight: bold;
   text-align: left;
   font-size: 1.1rem;
-
 }
 
 .btn2 {
@@ -183,7 +192,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8rem 5rem;
+  padding: 2rem 2rem;
   gap: 4rem;
   background-color: gray;
   color: white;
@@ -234,17 +243,18 @@ header {
   background-color: gray;
 }
 
-.display-product-section{
-    width: 50%;
+.display-product-section {
+  width: 50%;
 }
 
-.product-text{
-    margin-bottom: 2rem;
+.product-text {
+  margin-bottom: 2rem;
+  width: 100%;
 }
 
-.product-img{
-    width: fit-content;
-    border-radius: 2rem;
+.product-img {
+  width: fit-content;
+  border-radius: 2rem;
 }
 
 /* TEXT OVER GRAY */
