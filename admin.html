@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Thaniablaq Products</title>
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+      .admin-panel {
+        padding: 120px 40px 80px 40px;
+        background: #fff;
+        min-height: 60vh;
+      }
+      .admin-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .admin-controls input {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+      }
+      .admin-controls button {
+        padding: 10px 14px;
+        border-radius: 6px;
+        border: none;
+        background: orange;
+        color: #000;
+        font-weight: bold;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+      }
+      th,
+      td {
+        padding: 8px;
+        border: 1px solid #eee;
+        text-align: left;
+      }
+      .action-btn {
+        padding: 6px 8px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+      }
+      .save-btn {
+        background: #1e90ff;
+        color: #fff;
+      }
+      .del-btn {
+        background: #ff4d4d;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logoArea">
+        <img src="./image/logo_image.jpg" alt="Logo" class="logoImg" />
+        <p class="subTitle">Thaniablaq</p>
+      </div>
+
+      <nav class="navLinks">
+        <a href="/">Home</a>
+        <a href="#about">About</a>
+        <a href="#">Contact</a>
+        <a href="/admin">Admin</a>
+      </nav>
+
+      <div class="ham_div">
+        <img src="./image/ham_icon.png" alt="Menu" class="ham_icon" />
+      </div>
+    </header>
+
+    <section class="admin-panel">
+      <h2>Admin — Manage Products</h2>
+
+      <div class="admin-controls">
+        <input id="name" placeholder="Product name" />
+        <input id="price" placeholder="Price" type="number" />
+        <input
+          id="image"
+          placeholder="Image path (e.g. /image/product-img6.jpg)"
+        />
+        <input id="colors" placeholder="Colors (comma-separated)" />
+        <button id="create">Create Product</button>
+      </div>
+
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Colors</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="list"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="col">
+          <img
+            src="/image/logo_image.jpg"
+            alt="Thaniablaq"
+            class="footer-logo"
+          />
+          <h4>Thaniablaq</h4>
+          <p>Admin panel — manage products and inventory.</p>
+        </div>
+        <div class="col">
+          <h4>Quick Links</h4>
+          <a href="/">Home</a>
+          <a href="#about">About</a>
+          <a href="#product">Products</a>
+        </div>
+        <div class="col">
+          <h4>Account</h4>
+          <a href="#" id="admin-logout">Log out</a>
+        </div>
+      </div>
+      <div style="text-align: center; color: #777; margin-top: 18px">
+        © 2026 Designed by KMONEY
+      </div>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,177 @@
+/* GLOBAL RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui;
+}
+
+/* BODY — NO BACKGROUND IMAGE */
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.logoImg {
+  border-radius: 50%;
+  height: 35px;
+}
+.subTitle {
+  color: #fff;
+  font-weight: bold;
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* NAVIGATION LINKS */
+.navLinks {
+  display: flex;
+  gap: 30px;
+  position: relative;
+}
+
+.navLinks a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #fff;
+  transition: 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: orange;
+}
+
+/* HAMBURGER */
+.ham_div {
+  display: none;
+}
+
+.ham_icon {
+  width: 30px;
+  filter: invert(100%);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.ham_icon:hover {
+  scale: 1.2;
+}
+
+/* MOBILE NAVIGATION FIX */
+@media (max-width: 768px) {
+  .navLinks {
+    position: fixed;
+    top: 0;
+    right: -350px; /* hidden */
+    height: 100vh;
+    width: 300px;
+    background-color: #000;
+    flex-direction: column;
+    padding: 5rem 2rem;
+    transition: 0.5s ease;
+    z-index: 900;
+    gap: 2rem;
+  }
+
+  .navLinks.active {
+    right: 0; /* slide-in */
+  }
+
+  .ham_div {
+    display: block;
+    z-index: 1000;
+  }
+
+  .ham_icon {
+    width: 35px;
+    filter: invert(100%);
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+
+  }
+}
+.sign-up-img{
+  height: 50px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  
+}
+.email-input{
+   display: flex; 
+   flex-direction: column;
+  gap: 15px;
+}
+.signupPage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50rem;
+  flex-direction: column;
+  gap: 10px;
+}
+.sign-up-btn{
+   display: flex; 
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+.Forgotten-password{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+}
+
+.signup_button{
+  width: 200px;
+  height:35px ;background-color: black;
+  color: white;
+  border-radius: 3px;
+  gap: 10px;
+}
+.signup_button:hover{
+  background-color: rgba(0, 0, 0, 0.742);
+  width: 205px;
+  cursor: pointer;
+  border: none;
+}
+.input{
+  width: 250px;
+  height: 30px;
+  border-radius: 5px;
+
+}
+.sign-up{
+  background-color:gray;
+  width: 400px;
+  height:500px ;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5rem;
+  gap: 15px;
+  border-radius: 3rem;
+  align-items: center;
+  justify-content: center;
+  
+}
+

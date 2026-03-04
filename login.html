@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login - Thaniablaq</title>
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+      main {
+        padding: 120px 40px;
+      }
+      .login-box {
+        max-width: 480px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      }
+      input {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+      }
+      button {
+        background: orange;
+        padding: 10px 14px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logoArea">
+        <img src="./image/logo_image.jpg" alt="Logo" class="logoImg" />
+        <p class="subTitle">Thaniablaq</p>
+      </div>
+      <nav class="navLinks">
+        <a href="/">Home</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="ham_div">
+        <img src="./image/ham_icon.png" alt="Menu" class="ham_icon" />
+      </div>
+    </header>
+    <main>
+      <div class="login-box">
+        <h2>Login</h2>
+        <input id="email" placeholder="Email" />
+        <input id="password" type="password" placeholder="Password" />
+        <button id="login">Log in</button>
+        <p id="msg" style="color: red"></p>
+      </div>
+      <div style="max-width: 480px; margin: 18px auto; text-align: center">
+        <img src="/image/logo_image.jpg" alt="Thaniablaq" class="footer-logo" />
+      </div>
+    </main>
+    <script src="/app.js"></script>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="col">
+          <h4>Thaniablaq</h4>
+          <p>Login to access your account.</p>
+        </div>
+        <div class="col">
+          <h4>Quick Links</h4>
+          <a href="/">Home</a>
+          <a href="#about">About</a>
+        </div>
+      </div>
+      <div style="text-align: center; color: #777; margin-top: 18px">
+        © 2026 Designed by KMONEY
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thaniablaq — Sign Up</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logoArea">
+        <img
+          src="./image/logo_image.jpg"
+          alt="Thaniablaq Logo"
+          class="logoImg"
+        />
+        <p class="subTitle">Thaniablaq</p>
+      </div>
+
+      <nav class="navLinks">
+        <a href="/">Home</a>
+        <a href="#about">About</a>
+        <a href=" https://wa.me/2347082417100">Contact</a>
+        <a href="#sign-up">Sign up</a>
+        <a href="#">Log in</a>
+      </nav>
+
+      <div class="ham_div">
+        <img src="./image/ham_icon.png" alt="Menu" class="ham_icon" />
+      </div>
+    </header>
+
+    <main class="signupPage">
+      <section id="sign-up" class="sign-up">
+        <img
+          src="./image/logo_image.jpg"
+          alt=""
+          class="sign-up-img"
+          style="width: 80px; border-radius: 50%"
+        />
+        <div style="text-align:left;max-width:400px;margin:auto">
+          <label><input type="radio" name="method" value="email" checked> Sign up with Email</label>
+          <label style="margin-left:12px"><input type="radio" name="method" value="phone"> Sign up with Phone</label>
+
+          <div id="email-block" style="margin-top:12px">
+            <input id="email" type="text" class="input" placeholder="Email" />
+            <input id="password" type="password" class="input" placeholder="Password" />
+          </div>
+
+          <div id="phone-block" style="display:none;margin-top:12px">
+            <input id="phone" type="text" class="input" placeholder="Phone number (e.g. +1234555)" />
+            <button id="send-otp" class="signup_button" style="margin-top:8px">Send code</button>
+            <div id="otp-area" style="display:none;margin-top:8px">
+              <input id="otp-code" class="input" placeholder="Enter code" />
+              <p style="font-size:0.9rem;color:#ddd">Optional: set a password to protect the account</p>
+              <input id="otp-password" type="password" class="input" placeholder="Optional password" />
+              <button id="verify-otp" class="signup_button">Verify & Continue</button>
+            </div>
+          </div>
+
+          <a href="#" class="forgotten-password">Forgotten Password</a>
+          <div class="sign-up-btn" style="margin-top:12px">
+            <button id="signup" class="signup_button">Sign up</button>
+            <a href="/login.html"><button type="button" class="signup_button">Log in</button></a>
+          </div>
+          <p id="msg" style="color:green;margin-top:8px"></p>
+        </div>
+        </section>
+      </main>
+
+      
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="col">
+          <img src="/image/logo_image.jpg" alt="Thaniablaq" class="footer-logo">
+          <h4>Thaniablaq</h4>
+          <p>Premium-quality hair crafted for confidence and style.</p>
+        </div>
+        <div class="col">
+          <h4>Quick Links</h4>
+          <a href="/">Home</a>
+          <a href="#about">About</a>
+          <a href="#product">Products</a>
+        </div>
+        <div class="col newsletter">
+          <h4>Newsletter</h4>
+          <div>
+            <input id="footer-email" placeholder="Your email">
+            <button id="footer-join">Join</button>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;color:#777;margin-top:18px">© 2026 Designed by KMONEY</div>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
