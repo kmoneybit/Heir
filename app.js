@@ -1,5 +1,6 @@
 // ================= LIGHT/DARK MODE THEME TOGGLE =================
 // This code manages the Light Mode and Dark Mode theme switching functionality
+// When toggled, colors are completely inverted - black becomes white, white becomes black
 
 // STEP 1: Initialize theme on page load
 // Check localStorage for saved theme preference, default to 'light' mode
@@ -14,7 +15,7 @@ function initializeTheme() {
   applyTheme(currentTheme);
 }
 
-// STEP 2: Apply theme by adding/removing 'dark-mode' class
+// STEP 2: Apply theme by inverting colors or keeping normal
 // This function updates the page appearance based on the theme
 function applyTheme(theme) {
   const htmlElement = document.documentElement;
@@ -22,14 +23,14 @@ function applyTheme(theme) {
   const themeIcon = document.querySelector(".theme-icon");
 
   if (theme === "dark") {
-    // Dark mode: add the dark-mode class to HTML element
+    // Dark mode: invert all colors (black becomes white, white becomes black)
     htmlElement.classList.add("dark-mode");
     // Update button icon from moon to sun when in dark mode
     if (themeIcon) themeIcon.textContent = "☀️";
     // Save preference to localStorage
     localStorage.setItem("themeMode", "dark");
   } else {
-    // Light mode: remove the dark-mode class
+    // Light mode: normal colors
     htmlElement.classList.remove("dark-mode");
     // Update button icon from sun to moon when in light mode
     if (themeIcon) themeIcon.textContent = "🌙";

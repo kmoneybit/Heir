@@ -641,207 +641,26 @@ header {
   transform: scale(0.95);
 }
 
-/* Dark mode button styling - when dark mode is active */
-body.dark-mode .theme-toggle-btn {
-  color: #ffd700;
-  background-color: rgba(255, 215, 0, 0.1);
-}
+/* ================= DARK MODE - COMPLETE COLOR INVERSION ================= */
 
-body.dark-mode .theme-toggle-btn:hover {
-  background-color: rgba(255, 215, 0, 0.2);
-}
-
-/* ================= DARK MODE STYLES ================= */
-
-/* Dark mode background and text colors */
+/* Dark mode: invert ALL colors - black becomes white, white becomes black */
 body.dark-mode {
-  background: #1a1a1a;
-  color: #e0e0e0;
+  filter: invert(1);
 }
 
-/* Header in dark mode */
-body.dark-mode header {
-  background: #0d0d0d;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+/* Prevent images from being inverted (adjust their inversion back to normal) */
+body.dark-mode img {
+  filter: invert(1);
 }
 
-body.dark-mode .subTitle {
-  color: #e0e0e0;
+/* Prevent inline SVG icons from being inverted */
+body.dark-mode svg {
+  filter: invert(1);
 }
 
-body.dark-mode .navLinks a {
-  color: #e0e0e0;
-}
-
-body.dark-mode .navLinks a:hover {
-  color: #ffb347;
-}
-
-/* Hero section dark mode */
-body.dark-mode .heroSection {
-  background:
-    linear-gradient(rgba(20, 20, 30, 0.7), rgba(20, 20, 30, 0.7)),
-    url("./image/hero-image.jpg") center/cover no-repeat;
-}
-
-body.dark-mode .hero-text h1,
-body.dark-mode .hero-text p {
-  color: #e0e0e0;
-}
-
-/* About section dark mode */
-body.dark-mode .about-section {
-  background: #252525;
-  color: #e0e0e0;
-}
-
-body.dark-mode .about-section h2 {
-  color: #ffb347;
-}
-
-body.dark-mode .about-section p {
-  color: #b0b0b0;
-}
-
-/* Products section dark mode */
-body.dark-mode .products div {
-  background: #313131;
-  color: #e0e0e0;
-}
-
-body.dark-mode .products div:hover {
-  box-shadow: 0 15px 30px rgba(255, 140, 0, 0.2);
-}
-
-body.dark-mode .products h1 {
-  color: #ffb347;
-}
-
-body.dark-mode .products p {
-  color: #b0b0b0;
-}
-
-body.dark-mode .add-cart-btn {
-  background-color: #444;
-  color: #e0e0e0;
-}
-
-body.dark-mode .add-cart-btn:hover {
-  background-color: #ff8c00;
-  color: #fff;
-}
-
-/* Auth sections dark mode */
-body.dark-mode .auth-section {
-  background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
-}
-
-body.dark-mode .auth-card {
-  background: #313131;
-  color: #e0e0e0;
-}
-
-body.dark-mode .auth-title {
-  color: #ffb347;
-}
-
-body.dark-mode .auth-subtitle {
-  color: #b0b0b0;
-}
-
-body.dark-mode .form-input {
-  background: #444;
-  border-color: #555;
-  color: #e0e0e0;
-}
-
-body.dark-mode .form-input:focus {
-  background: #4a4a4a;
-  border-color: #ff8c00;
-  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
-}
-
-body.dark-mode .form-input::placeholder {
-  color: #888;
-}
-
-body.dark-mode .method-label {
-  border-color: #555;
-  color: #b0b0b0;
-  background: #2a2a2a;
-}
-
-body.dark-mode .method-label:hover {
-  border-color: #ffb347;
-  background: #333;
-}
-
-body.dark-mode .auth-link {
-  color: #b0b0b0;
-}
-
-body.dark-mode .auth-link a {
-  color: #ffb347;
-}
-
-/* Team section dark mode */
-body.dark-mode .team-section {
-  background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
-}
-
-body.dark-mode .team-title {
-  color: #ffb347;
-}
-
-body.dark-mode .team-member {
-  background: #313131;
-  color: #e0e0e0;
-}
-
-body.dark-mode .team-member:hover {
-  box-shadow: 0 15px 50px rgba(255, 140, 0, 0.2);
-}
-
-body.dark-mode .team-member h3 {
-  color: #ffb347;
-}
-
-body.dark-mode .team-member p {
-  color: #b0b0b0;
-}
-
-body.dark-mode .team-bio {
-  color: #999;
-}
-
-/* Footer dark mode */
-body.dark-mode .site-footer {
-  background: #0d0d0d;
-  color: #e0e0e0;
-}
-
-body.dark-mode .site-footer p,
-body.dark-mode .site-footer a {
-  color: #b0b0b0;
-}
-
-body.dark-mode .site-footer a:hover {
-  color: #ffb347;
-}
-
-body.dark-mode .site-footer .newsletter input {
-  background: #313131;
-  border-color: #555;
-  color: #e0e0e0;
-}
-
-body.dark-mode .site-footer .newsletter button {
-  background: #ff8c00;
-  color: #1a1a1a;
-}
-
-body.dark-mode .site-footer .newsletter button:hover {
-  background: #ffb347;
+/* Keep button normal appearance in dark mode */
+body.dark-mode .theme-toggle-btn {
+  filter: invert(1);
 }
 
 /* ================= FOOTER ================= */
