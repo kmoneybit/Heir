@@ -307,6 +307,14 @@ app.post("/api/products", requireAdmin, (req, res) => {
   );
 });
 
+// endpoint for uploading product images
+app.post("/api/upload", requireAdmin, upload.single("image"), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+  // the file has been stored in image/ directory
+  const relativePath = "/image/" + req.file.filename;
+  res.json({ path: relativePath });
+});
+
 app.put("/api/products/:id", requireAdmin, (req, res) => {
   const { id } = req.params;
   const { name, price, image, colors } = req.body;
