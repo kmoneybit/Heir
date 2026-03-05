@@ -616,9 +616,9 @@ header {
 .theme-toggle-btn {
   background: rgba(255, 255, 255, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.3);
-  font-size: 1.1rem;             /* slightly smaller overall */
+  font-size: 1.1rem; /* slightly smaller overall */
   cursor: pointer;
-  padding: 8px 10px;             /* tighter padding to shrink */
+  padding: 8px 10px; /* tighter padding to shrink */
   border-radius: 8px;
   transition: all 0.3s ease;
   display: flex;
@@ -631,7 +631,7 @@ header {
 
 /* icon inside button gets its own size & transition */
 .theme-toggle-btn .theme-icon {
-  font-size: 0.9rem;            /* smaller icon */
+  font-size: 0.9rem; /* smaller icon */
   transition: transform 0.2s ease;
 }
 

@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment - Thaniablaq Hair</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .payment-container {
+        max-width: 600px;
+        margin: 100px auto;
+        padding: 40px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      .payment-container h1 {
+        margin-bottom: 10px;
+        color: #222;
+      }
+      .order-summary {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      .order-summary h3 {
+        margin: 0 0 10px 0;
+      }
+      .order-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #ddd;
+      }
+      .order-item:last-child {
+        border-bottom: none;
+      }
+      .order-total {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-top: 10px;
+        text-align: right;
+        color: #ff8c00;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        box-sizing: border-box;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      .payment-btn {
+        width: 100%;
+        padding: 12px;
+        background: #ff8c00;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .payment-btn:hover {
+        background: #e67e00;
+      }
+      .payment-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+      .back-link {
+        text-align: center;
+        margin-top: 15px;
+      }
+      .back-link a {
+        color: #ff8c00;
+        text-decoration: none;
+      }
+      .back-link a:hover {
+        text-decoration: underline;
+      }
+      html.dark-mode {
+        background: #000;
+      }
+      html.dark-mode .payment-container {
+        background: #1a1a1a;
+        color: white;
+      }
+      html.dark-mode .payment-container h1,
+      html.dark-mode .form-group label {
+        color: white;
+      }
+      html.dark-mode .order-summary {
+        background: #333;
+        color: white;
+      }
+      html.dark-mode .form-group input {
+        background: #444;
+        color: white;
+        border-color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main-content">
+      <div class="payment-container">
+        <h1>Payment</h1>
+        <div class="order-summary" id="order-summary">Loading...</div>
+
+        <form id="payment-form" style="display: none">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="customer-email" required />
+          </div>
+
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="customer-name" required />
+          </div>
+
+          <div class="form-group">
+            <label>Address</label>
+            <input type="text" id="customer-address" required />
+          </div>
+
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" id="customer-phone" required />
+          </div>
+
+          <h3>Payment Details</h3>
+
+          <div class="form-group">
+            <label>Card Number</label>
+            <input
+              type="text"
+              id="card-number"
+              placeholder="1234 5678 9012 3456"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Expiry Date</label>
+              <input
+                type="text"
+                id="card-expiry"
+                placeholder="MM/YY"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>CVV</label>
+              <input type="text" id="card-cvv" placeholder="123" required />
+            </div>
+          </div>
+
+          <button type="submit" class="payment-btn" id="submit-btn">
+            Complete Payment
+          </button>
+        </form>
+
+        <div class="back-link">
+          <a href="/">← Back to home</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API_BASE =
+        window.location.protocol === "file:" ||
+        window.location.origin === "null"
+          ? "http://localhost:3000"
+          : window.location.origin;
+
+      // Initialize theme
+      function initializeTheme() {
+        const savedTheme = localStorage.getItem("themeMode");
+        const currentTheme = savedTheme || "light";
+        if (currentTheme === "dark") {
+          document.documentElement.classList.add("dark-mode");
+        }
+      }
+      initializeTheme();
+
+      // Get cart from session/localStorage
+      function getCart() {
+        try {
+          return JSON.parse(sessionStorage.getItem("checkout_cart") || "[]");
+        } catch {
+          return [];
+        }
+      }
+
+      // Load and display order summary
+      function loadOrderSummary() {
+        const cart = getCart();
+        if (!cart || cart.length === 0) {
+          document.getElementById("order-summary").innerHTML =
+            '<p>No items in cart. <a href="/">Go back to shop</a></p>';
+          return;
+        }
+
+        let total = 0;
+        let html = "<h3>Order Summary</h3>";
+        cart.forEach((item) => {
+          html += `
+            <div class="order-item">
+              <span>${item.name} x1</span>
+              <span>$${item.price.toFixed(2)}</span>
+            </div>
+          `;
+          total += item.price;
+        });
+        html += `<div class="order-total">Total: $${total.toFixed(2)}</div>`;
+        document.getElementById("order-summary").innerHTML = html;
+        document.getElementById("payment-form").style.display = "block";
+      }
+
+      // Handle payment submission
+      document
+        .getElementById("payment-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const cart = getCart();
+          if (!cart || cart.length === 0) {
+            alert("Cart is empty");
+            window.location.href = "/";
+            return;
+          }
+
+          const submitBtn = document.getElementById("submit-btn");
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Processing...";
+
+          const paymentData = {
+            items: cart,
+            customer_email: document.getElementById("customer-email").value,
+            customer_name: document.getElementById("customer-name").value,
+            customer_address: document.getElementById("customer-address").value,
+            customer_phone: document.getElementById("customer-phone").value,
+            card_number: document
+              .getElementById("card-number")
+              .value.replace(/\s/g, "")
+              .slice(-4),
+            amount: cart.reduce((sum, item) => sum + item.price, 0),
+          };
+
+          try {
+            const res = await fetch(`${API_BASE}/api/checkout`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(paymentData),
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || "Payment failed");
+
+            // Clear cart from sessionStorage
+            sessionStorage.removeItem("checkout_cart");
+            alert(
+              "Payment successful! Your order has been placed. Order ID: " +
+                data.order_id,
+            );
+            window.location.href = "/";
+          } catch (err) {
+            console.error(err);
+            alert("Payment failed: " + err.message);
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Complete Payment";
+          }
+        });
+
+      // Load summary on page load
+      document.addEventListener("DOMContentLoaded", loadOrderSummary);
+    </script>
+  </body>
+</html>

@@ -45,6 +45,12 @@ db.serialize(() => {
     db.run(`CREATE TABLE orders (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       items TEXT,
+      customer_email TEXT,
+      customer_name TEXT,
+      customer_address TEXT,
+      customer_phone TEXT,
+      amount REAL,
+      status TEXT DEFAULT 'completed',
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )`);
 
@@ -360,7 +366,57 @@ app.put("/api/products/:id", requireAdmin, (req, res) => {
   );
 });
 
-app.delete("/api/products/:id", requireAdmin, (req, res) => {
+// checkout endpoint - process payment and create order
+app.post("/api/checkout", async (req, res) => {
+  const {
+    items,
+    customer_email,
+    customer_name,
+    customer_address,
+    customer_phone,
+    card_number,
+    amount,
+  } = req.body;
+
+  if (
+    !items ||
+    !Array.isArray(items) ||
+    items.length === 0 ||
+    !customer_email ||
+    !customer_name ||
+    !customer_address ||
+    !customer_phone ||
+    !card_number ||
+    !amount
+  ) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  // Simple payment simulation - in production use Stripe, PayPal, etc.
+  // For now, accept any card ending in valid digits
+  if (!/^\d{4}$/.test(card_number)) {
+    return res.status(400).json({ error: "Invalid card number" });
+  }
+
+  const itemsStr = JSON.stringify(items);
+  db.run(
+    `INSERT INTO orders (items, customer_email, customer_name, customer_address, customer_phone, amount, status)
+     VALUES (?, ?, ?, ?, ?, ?, 'completed')`,
+    [
+      itemsStr,
+      customer_email,
+      customer_name,
+      customer_address,
+      customer_phone,
+      amount,
+    ],
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ order_id: this.lastID, status: "completed" });
+    },
+  );
+});
+
   const { id } = req.params;
   db.run("DELETE FROM products WHERE id=?", [id], function (err) {
     if (err) return res.status(500).json({ error: err.message });

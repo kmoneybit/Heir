@@ -396,6 +396,10 @@ function setupAdminPage() {
       const itemsList = (o.items || []).map((i) => i.name || "").join(", ");
       tr.innerHTML = `
         <td>${o.id}</td>
+        <td>${o.customer_name || ""}</td>
+        <td>${o.customer_email || ""}</td>
+        <td>${o.customer_phone || ""}</td>
+        <td>$${o.amount ? o.amount.toFixed(2) : "0.00"}</td>
         <td>${itemsList}</td>
         <td>${o.created_at || ""}</td>
       `;
@@ -536,20 +540,10 @@ document.addEventListener("click", async (e) => {
     e.preventDefault();
     const cart = getCart();
     if (cart.length === 0) return alert("Your cart is empty");
-    if (!confirm(`Place order for ${cart.length} item(s)?`)) return;
-    try {
-      const res = await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items: cart }),
-      });
-      if (!res.ok) throw new Error("Order failed");
-      alert("Order placed!");
-      saveCart([]);
-    } catch (err) {
-      console.error(err);
-      alert("Could not place order");
-    }
+    // Store cart in sessionStorage for payment page
+    sessionStorage.setItem("checkout_cart", JSON.stringify(cart));
+    // Redirect to payment page
+    window.location.href = "/payment.html";
     return;
   }
 
