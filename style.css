@@ -134,7 +134,7 @@ header {
 .about-section {
   padding: 120px 40px 80px 40px;
   text-align: center;
-  background: white;
+  background: #111;
 }
 
 .about-section h2 {
@@ -146,7 +146,7 @@ header {
   max-width: 900px;
   margin: auto;
   line-height: 1.7;
-  color: #444;
+  color: #ccc;
 }
 
 /* ================= PRODUCTS SECTION ================= */
@@ -160,12 +160,13 @@ header {
 
 /* Product Card */
 .products div {
-  background: white;
+  background: #222;
   padding: 20px;
   border-radius: 15px;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   transition: 0.3s ease;
+  color: white;
 }
 
 .products div:hover {
@@ -230,7 +231,7 @@ header {
 /* ================= SIGN UP & LOGIN SECTION ================= */
 .auth-section {
   padding: 100px 20px 80px;
-  background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -247,27 +248,28 @@ header {
 }
 
 .auth-card {
-  background: white;
+  background: #333;
   padding: 50px 40px;
   border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  color: white;
 }
 
 .auth-card:hover {
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
 }
 
 .auth-title {
   font-size: 2rem;
-  color: #1a1a1a;
+  color: #fff;
   margin-bottom: 8px;
   font-weight: 700;
   text-align: center;
 }
 
 .auth-subtitle {
-  color: #666;
+  color: #ccc;
   text-align: center;
   font-size: 0.95rem;
   margin-bottom: 32px;
@@ -490,7 +492,7 @@ header {
 /* ================= TEAM SECTION ================= */
 .team-section {
   padding: 100px 20px;
-  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
   text-align: center;
 }
 
@@ -555,16 +557,17 @@ header {
 }
 
 .team-member {
-  background: white;
+  background: #333;
   padding: 40px 30px;
   border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  color: white;
 }
 
 .team-member:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
 }
 
 .team-avatar {
@@ -608,65 +611,6 @@ header {
   .team-grid {
     grid-template-columns: 1fr;
   }
-}
-
-/* ================= LIGHT/DARK MODE TOGGLE ================= */
-
-/* Theme Toggle Button - positioned in the header */
-.theme-toggle-btn {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  font-size: 1.3rem;
-  cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-.theme-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: scale(1.1);
-}
-
-.theme-toggle-btn:active {
-  transform: scale(0.95);
-}
-
-/* ================= DARK MODE - COMPLETE COLOR INVERSION ================= */
-
-/* Dark mode: invert ALL colors - black becomes white, white becomes black */
-html.dark-mode #main-content {
-  filter: invert(1);
-}
-
-/* Prevent images from being inverted (adjust their inversion back to normal) */
-html.dark-mode #main-content img {
-  filter: invert(1);
-}
-
-/* Prevent inline SVG icons from being inverted */
-html.dark-mode #main-content svg {
-  filter: invert(1);
-}
-
-/* Keep toggle button always visible and readable in both modes */
-html.dark-mode #main-content .theme-toggle-btn {
-  filter: invert(1);
-  background: rgba(255, 215, 0, 0.15);
-  border: 2px solid rgba(255, 215, 0, 0.3);
-  color: #ffd700;
-}
-
-html.dark-mode #main-content .theme-toggle-btn:hover {
-  background: rgba(255, 215, 0, 0.25);
-  border-color: rgba(255, 215, 0, 0.5);
 }
 
 /* ================= FOOTER ================= */
