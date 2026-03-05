@@ -644,22 +644,22 @@ header {
 /* ================= DARK MODE - COMPLETE COLOR INVERSION ================= */
 
 /* Dark mode: invert ALL colors - black becomes white, white becomes black */
-body.dark-mode {
+html.dark-mode {
   filter: invert(1);
 }
 
 /* Prevent images from being inverted (adjust their inversion back to normal) */
-body.dark-mode img {
+html.dark-mode img {
   filter: invert(1);
 }
 
 /* Prevent inline SVG icons from being inverted */
-body.dark-mode svg {
+html.dark-mode svg {
   filter: invert(1);
 }
 
 /* Keep button normal appearance in dark mode */
-body.dark-mode .theme-toggle-btn {
+html.dark-mode .theme-toggle-btn {
   filter: invert(1);
 }
 
