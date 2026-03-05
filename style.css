@@ -608,7 +608,9 @@ header {
   .team-grid {
     grid-template-columns: 1fr;
   }
+}
 
+/* ================= FOOTER ================= */
 footer {
   text-align: center;
   padding: 25px;
