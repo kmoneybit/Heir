@@ -105,73 +105,19 @@ header {
     cursor: pointer;
     position: relative;
     z-index: 1001;
-
   }
 }
-.sign-up-img{
-  height: 50px;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  
-}
-.email-input{
-   display: flex; 
-   flex-direction: column;
-  gap: 15px;
-}
-.signupPage{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50rem;
-  flex-direction: column;
-  gap: 10px;
-}
-.sign-up-btn{
-   display: flex; 
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-}
-.Forgotten-password{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: white;
+
+/* Override form styles to use style.css */
+#sign-up {
+  background: none !important;
+  padding: 0 !important;
+  text-align: center;
+  color: #1a1a1a;
 }
 
-.signup_button{
-  width: 200px;
-  height:35px ;background-color: black;
-  color: white;
-  border-radius: 3px;
-  gap: 10px;
+.sign-up-img {
+  margin-bottom: 24px;
+  height: auto;
+  border-radius: 50% !important;
 }
-.signup_button:hover{
-  background-color: rgba(0, 0, 0, 0.742);
-  width: 205px;
-  cursor: pointer;
-  border: none;
-}
-.input{
-  width: 250px;
-  height: 30px;
-  border-radius: 5px;
-
-}
-.sign-up{
-  background-color:gray;
-  width: 400px;
-  height:500px ;
-  justify-content: space-around;
-  align-items: center;
-  padding: 5rem;
-  gap: 15px;
-  border-radius: 3rem;
-  align-items: center;
-  justify-content: center;
-  
-}
-

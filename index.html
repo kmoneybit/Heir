@@ -68,38 +68,132 @@
     </section>
 
     <!-- SIGN UP -->
-    <section id="sign-up" class="sign-up">
-      <h2>Sign Up</h2>
-      <div style="text-align:left;max-width:480px;margin:auto">
-        <label><input type="radio" name="method" value="email" checked> Sign up with Email</label>
-        <label style="margin-left:12px"><input type="radio" name="method" value="phone"> Sign up with Phone</label>
+    <section id="sign-up" class="auth-section sign-up">
+      <div class="auth-container">
+        <div class="auth-card">
+          <h2 class="auth-title">Create Account</h2>
+          <p class="auth-subtitle">Join our community for exclusive offers</p>
 
-        <div id="email-block" style="margin-top:12px">
-          <input id="home-email" type="text" placeholder="Enter Email" class="input" />
-          <input id="home-password" type="password" placeholder="Enter Password" class="input" />
-          <button id="home-signup" class="signup_button">Register</button>
-        </div>
-
-        <div id="phone-block" style="display:none;margin-top:12px">
-          <input id="home-phone" type="text" class="input" placeholder="Phone number (e.g. +15551234567)" />
-          <button id="home-send-otp" class="signup_button" style="margin-top:8px">Send code</button>
-          <div id="home-otp-area" style="display:none;margin-top:8px">
-            <input id="home-otp-code" class="input" placeholder="Enter code" />
-            <p style="font-size:0.9rem;color:#ddd">Optional: set a password to protect the account</p>
-            <input id="home-otp-password" type="password" class="input" placeholder="Optional password" />
-            <button id="home-verify-otp" class="signup_button">Verify & Continue</button>
+          <div class="method-selector">
+            <label class="method-label">
+              <input type="radio" name="method" value="email" checked />
+              <span>Email</span>
+            </label>
+            <label class="method-label">
+              <input type="radio" name="method" value="phone" />
+              <span>Phone</span>
+            </label>
           </div>
+
+          <div id="email-block" class="form-block">
+            <div class="form-group">
+              <input
+                id="home-email"
+                type="email"
+                placeholder="Email Address"
+                class="form-input"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                id="home-password"
+                type="password"
+                placeholder="Password"
+                class="form-input"
+              />
+            </div>
+            <button id="home-signup" class="btn-primary btn-full">
+              Create Account
+            </button>
+          </div>
+
+          <div id="phone-block" class="form-block" style="display: none">
+            <div class="form-group">
+              <input
+                id="home-phone"
+                type="tel"
+                placeholder="Phone number (e.g. +15551234567)"
+                class="form-input"
+              />
+            </div>
+            <button id="home-send-otp" class="btn-primary btn-full">
+              Send Verification Code
+            </button>
+            <div id="home-otp-area" style="display: none">
+              <div class="form-group">
+                <input
+                  id="home-otp-code"
+                  class="form-input"
+                  placeholder="Verification Code"
+                />
+              </div>
+              <p class="form-hint">
+                Optional: Set a password to protect your account
+              </p>
+              <div class="form-group">
+                <input
+                  id="home-otp-password"
+                  type="password"
+                  class="form-input"
+                  placeholder="Password (Optional)"
+                />
+              </div>
+              <button id="home-verify-otp" class="btn-primary btn-full">
+                Verify & Continue
+              </button>
+            </div>
+          </div>
+
+          <p class="auth-link">
+            Already have an account? <a href="#login">Sign in here</a>
+          </p>
         </div>
       </div>
     </section>
 
     <!-- LOGIN (homepage) -->
-    <section id="login" class="sign-up">
-      <h2>Log In</h2>
-      <input id="login-email" type="text" placeholder="Enter Email" class="input" />
-      <input id="login-password" type="password" placeholder="Enter Password" class="input" />
-      <a href="/login.html" style="color:#ffb347;display:inline-block;margin-bottom:8px">Open full login page</a>
-      <button class="login_button">Log In</button>
+    <section id="login" class="auth-section login-section">
+      <div class="auth-container">
+        <div class="auth-card">
+          <h2 class="auth-title">Sign In</h2>
+          <p class="auth-subtitle">Welcome back to Thaniablaq Hair</p>
+
+          <div class="form-group">
+            <input
+              id="login-email"
+              type="email"
+              placeholder="Email Address"
+              class="form-input"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              id="login-password"
+              type="password"
+              placeholder="Password"
+              class="form-input"
+            />
+          </div>
+
+          <button class="login_button btn-primary btn-full">Sign In</button>
+
+          <p class="auth-link">
+            <a href="#sign-up">Don't have an account? Sign up</a>
+          </p>
+          <p
+            style="
+              text-align: center;
+              margin-top: 16px;
+              font-size: 0.9rem;
+              color: #999;
+            "
+          >
+            <a href="/login.html" class="auth-link-secondary"
+              >Or open full login page</a
+            >
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- FOOTER -->

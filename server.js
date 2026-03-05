@@ -71,12 +71,19 @@ db.serialize(() => {
     // ignore error if column exists
   });
   // ensure otps table exists for phone verification
-  db.run(`CREATE TABLE IF NOT EXISTS otps (
+  db.run(
+    `CREATE TABLE IF NOT EXISTS otps (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     phone TEXT,
     code TEXT,
     expires_at INTEGER
-  )`);
+  )`,
+    () => {
+      // Start server only after DB is fully initialized
+      const PORT = process.env.PORT || 3000;
+      app.listen(PORT, () => console.log("Server running on port", PORT));
+    },
+  );
 });
 
 // helper: send SMS using Twilio if configured, otherwise log
@@ -321,8 +328,3 @@ app.delete("/api/products/:id", requireAdmin, (req, res) => {
     res.json({ changes: this.changes });
   });
 });
-
-// Admin UI (protected earlier in file)
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Server running on port", PORT));
