@@ -8,7 +8,7 @@
 
 body {
   overflow-x: hidden;
-  background: #f9f9f9;
+  background: #000;
 }
 
 /* ================= HEADER ================= */
@@ -642,29 +642,29 @@ header {
 /* ================= DARK MODE - COMPLETE COLOR INVERSION ================= */
 
 /* Dark mode: invert ALL colors - black becomes white, white becomes black */
-html.dark-mode {
+html.dark-mode #main-content {
   filter: invert(1);
 }
 
 /* Prevent images from being inverted (adjust their inversion back to normal) */
-html.dark-mode img {
+html.dark-mode #main-content img {
   filter: invert(1);
 }
 
 /* Prevent inline SVG icons from being inverted */
-html.dark-mode svg {
+html.dark-mode #main-content svg {
   filter: invert(1);
 }
 
 /* Keep toggle button always visible and readable in both modes */
-html.dark-mode .theme-toggle-btn {
+html.dark-mode #main-content .theme-toggle-btn {
   filter: invert(1);
   background: rgba(255, 215, 0, 0.15);
   border: 2px solid rgba(255, 215, 0, 0.3);
   color: #ffd700;
 }
 
-html.dark-mode .theme-toggle-btn:hover {
+html.dark-mode #main-content .theme-toggle-btn:hover {
   background: rgba(255, 215, 0, 0.25);
   border-color: rgba(255, 215, 0, 0.5);
 }

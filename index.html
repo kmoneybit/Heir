@@ -8,97 +8,170 @@
   </head>
 
   <body>
-    <!-- HEADER -->
-    <header id="home">
-      <div class="logoArea">
-        <img src="./image/logo_image.jpg" alt="Logo" class="logoImg" />
-        <p class="subTitle">Thaniablaq</p>
-      </div>
+    <div id="main-content">
+      <!-- HEADER -->
+      <header id="home">
+        <div class="logoArea">
+          <img src="./image/logo_image.jpg" alt="Logo" class="logoImg" />
+          <p class="subTitle">Thaniablaq</p>
+        </div>
 
-      <nav class="navLinks">
-        <a href="./index.html">Home</a>
-        <a href="#about">About</a>
-        <a href="https://wa.me/2347082417100">Contact</a>
-        <a href="#sign-up">Sign Up</a>
-        <a href="#login">Log In</a>
-      </nav>
+        <nav class="navLinks">
+          <a href="./index.html">Home</a>
+          <a href="#about">About</a>
+          <a href="https://wa.me/2347082417100">Contact</a>
+          <a href="#sign-up">Sign Up</a>
+          <a href="#login">Log In</a>
+        </nav>
 
-      <div class="ham_div">
-        <img src="./image/ham_icon.png" alt="Menu" class="ham_icon" />
-      </div>
+        <div class="ham_div">
+          <img src="./image/ham_icon.png" alt="Menu" class="ham_icon" />
+        </div>
 
-      <!-- LIGHT/DARK MODE TOGGLE BUTTON -->
-      <button
-        id="theme-toggle"
-        class="theme-toggle-btn"
-        title="Toggle Light/Dark Mode"
-        aria-label="Toggle theme"
+        <!-- LIGHT/DARK MODE TOGGLE BUTTON -->
+        <button
+          id="theme-toggle"
+          class="theme-toggle-btn"
+          title="Toggle Light/Dark Mode"
+          aria-label="Toggle theme"
+        >
+          <span class="theme-icon">🌙</span>
+        </button>
+      </header>
+
+      <!-- HERO SECTION -->
+      <section class="heroSection">
+        <div class="hero-text">
+          <h1 style="font-size: 60px">Welcome To Thaniablaq Hair</h1>
+          <p>Premium quality hair for confident, beautiful women</p>
+          <a class="btn-shop" href="#product">Shop Now</a>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="about-section">
+        <h2>About Us</h2>
+        <p>
+          At Thaniablaq, we are passionate about providing premium-quality hair
+          that reflects elegance, confidence, and timeless beauty. Hair is more
+          than a style — it is an expression of personality and confidence. We
+          carefully select the finest collections to enhance natural beauty. Our
+          products are soft, durable, and easy to maintain for long-lasting
+          satisfaction. Whether you prefer sleek straight styles, glamorous
+          curls, or natural textures, we deliver hair that helps you look and
+          feel your best.
+        </p>
+      </section>
+
+      <h1
+        id="product"
+        style="
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          color: orange;
+        "
       >
-        <span class="theme-icon">🌙</span>
-      </button>
-    </header>
+        PRODUCTS
+      </h1>
+      <section class="products">
+        <!-- Product cards will be loaded dynamically -->
+      </section>
 
-    <!-- HERO SECTION -->
-    <section class="heroSection">
-      <div class="hero-text">
-        <h1 style="font-size: 60px">Welcome To Thaniablaq Hair</h1>
-        <p>Premium quality hair for confident, beautiful women</p>
-        <a class="btn-shop" href="#product">Shop Now</a>
-      </div>
-    </section>
+      <!-- SIGN UP -->
+      <section id="sign-up" class="auth-section sign-up">
+        <div class="auth-container">
+          <div class="auth-card">
+            <h2 class="auth-title">Create Account</h2>
+            <p class="auth-subtitle">Join our community for exclusive offers</p>
 
-    <!-- ABOUT -->
-    <section id="about" class="about-section">
-      <h2>About Us</h2>
-      <p>
-        At Thaniablaq, we are passionate about providing premium-quality hair
-        that reflects elegance, confidence, and timeless beauty. Hair is more
-        than a style — it is an expression of personality and confidence. We
-        carefully select the finest collections to enhance natural beauty. Our
-        products are soft, durable, and easy to maintain for long-lasting
-        satisfaction. Whether you prefer sleek straight styles, glamorous curls,
-        or natural textures, we deliver hair that helps you look and feel your
-        best.
-      </p>
-    </section>
+            <div class="method-selector">
+              <label class="method-label">
+                <input type="radio" name="method" value="email" checked />
+                <span>Email</span>
+              </label>
+              <label class="method-label">
+                <input type="radio" name="method" value="phone" />
+                <span>Phone</span>
+              </label>
+            </div>
 
-    <h1
-      id="product"
-      style="
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        color: orange;
-      "
-    >
-      PRODUCTS
-    </h1>
-    <section class="products">
-      <!-- Product cards will be loaded dynamically -->
-    </section>
+            <div id="email-block" class="form-block">
+              <div class="form-group">
+                <input
+                  id="home-email"
+                  type="email"
+                  placeholder="Email Address"
+                  class="form-input"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  id="home-password"
+                  type="password"
+                  placeholder="Password"
+                  class="form-input"
+                />
+              </div>
+              <button id="home-signup" class="btn-primary btn-full">
+                Create Account
+              </button>
+            </div>
 
-    <!-- SIGN UP -->
-    <section id="sign-up" class="auth-section sign-up">
-      <div class="auth-container">
-        <div class="auth-card">
-          <h2 class="auth-title">Create Account</h2>
-          <p class="auth-subtitle">Join our community for exclusive offers</p>
+            <div id="phone-block" class="form-block" style="display: none">
+              <div class="form-group">
+                <input
+                  id="home-phone"
+                  type="tel"
+                  placeholder="Phone number (e.g. +15551234567)"
+                  class="form-input"
+                />
+              </div>
+              <button id="home-send-otp" class="btn-primary btn-full">
+                Send Verification Code
+              </button>
+              <div id="home-otp-area" style="display: none">
+                <div class="form-group">
+                  <input
+                    id="home-otp-code"
+                    class="form-input"
+                    placeholder="Verification Code"
+                  />
+                </div>
+                <p class="form-hint">
+                  Optional: Set a password to protect your account
+                </p>
+                <div class="form-group">
+                  <input
+                    id="home-otp-password"
+                    type="password"
+                    class="form-input"
+                    placeholder="Password (Optional)"
+                  />
+                </div>
+                <button id="home-verify-otp" class="btn-primary btn-full">
+                  Verify & Continue
+                </button>
+              </div>
+            </div>
 
-          <div class="method-selector">
-            <label class="method-label">
-              <input type="radio" name="method" value="email" checked />
-              <span>Email</span>
-            </label>
-            <label class="method-label">
-              <input type="radio" name="method" value="phone" />
-              <span>Phone</span>
-            </label>
+            <p class="auth-link">
+              Already have an account? <a href="#login">Sign in here</a>
+            </p>
           </div>
+        </div>
+      </section>
 
-          <div id="email-block" class="form-block">
+      <!-- LOGIN (homepage) -->
+      <section id="login" class="auth-section login-section">
+        <div class="auth-container">
+          <div class="auth-card">
+            <h2 class="auth-title">Sign In</h2>
+            <p class="auth-subtitle">Welcome back to Thaniablaq Hair</p>
+
             <div class="form-group">
               <input
-                id="home-email"
+                id="login-email"
                 type="email"
                 placeholder="Email Address"
                 class="form-input"
@@ -106,191 +179,120 @@
             </div>
             <div class="form-group">
               <input
-                id="home-password"
+                id="login-password"
                 type="password"
                 placeholder="Password"
                 class="form-input"
               />
             </div>
-            <button id="home-signup" class="btn-primary btn-full">
-              Create Account
-            </button>
-          </div>
 
-          <div id="phone-block" class="form-block" style="display: none">
-            <div class="form-group">
-              <input
-                id="home-phone"
-                type="tel"
-                placeholder="Phone number (e.g. +15551234567)"
-                class="form-input"
-              />
-            </div>
-            <button id="home-send-otp" class="btn-primary btn-full">
-              Send Verification Code
-            </button>
-            <div id="home-otp-area" style="display: none">
-              <div class="form-group">
-                <input
-                  id="home-otp-code"
-                  class="form-input"
-                  placeholder="Verification Code"
-                />
-              </div>
-              <p class="form-hint">
-                Optional: Set a password to protect your account
-              </p>
-              <div class="form-group">
-                <input
-                  id="home-otp-password"
-                  type="password"
-                  class="form-input"
-                  placeholder="Password (Optional)"
-                />
-              </div>
-              <button id="home-verify-otp" class="btn-primary btn-full">
-                Verify & Continue
-              </button>
-            </div>
-          </div>
+            <button class="login_button btn-primary btn-full">Sign In</button>
 
-          <p class="auth-link">
-            Already have an account? <a href="#login">Sign in here</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- LOGIN (homepage) -->
-    <section id="login" class="auth-section login-section">
-      <div class="auth-container">
-        <div class="auth-card">
-          <h2 class="auth-title">Sign In</h2>
-          <p class="auth-subtitle">Welcome back to Thaniablaq Hair</p>
-
-          <div class="form-group">
-            <input
-              id="login-email"
-              type="email"
-              placeholder="Email Address"
-              class="form-input"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              id="login-password"
-              type="password"
-              placeholder="Password"
-              class="form-input"
-            />
-          </div>
-
-          <button class="login_button btn-primary btn-full">Sign In</button>
-
-          <p class="auth-link">
-            <a href="#sign-up">Don't have an account? Sign up</a>
-          </p>
-          <p
-            style="
-              text-align: center;
-              margin-top: 16px;
-              font-size: 0.9rem;
-              color: #999;
-            "
-          >
-            <a href="/login.html" class="auth-link-secondary"
-              >Or open full login page</a
+            <p class="auth-link">
+              <a href="#sign-up">Don't have an account? Sign up</a>
+            </p>
+            <p
+              style="
+                text-align: center;
+                margin-top: 16px;
+                font-size: 0.9rem;
+                color: #999;
+              "
             >
-          </p>
+              <a href="/login.html" class="auth-link-secondary"
+                >Or open full login page</a
+              >
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- TEAM SECTION -->
-    <section id="team" class="team-section">
-      <div class="team-container">
-        <h2 class="team-title">Meet Our Team</h2>
-        <button id="team-toggle" class="team-toggle-btn">Show Team</button>
+      <!-- TEAM SECTION -->
+      <section id="team" class="team-section">
+        <div class="team-container">
+          <h2 class="team-title">Meet Our Team</h2>
+          <button id="team-toggle" class="team-toggle-btn">Show Team</button>
 
-        <div id="team-content" class="team-content" style="display: none">
-          <div class="team-grid">
-            <div class="team-member">
-              <div class="team-avatar">KM</div>
-              <h3>KMONEY</h3>
-              <p>Founder & Designer</p>
-              <p class="team-bio">
-                Creative mind behind Thaniablaq Hair's vision and design.
-              </p>
-            </div>
-            <div class="team-member">
-              <div class="team-avatar">TH</div>
-              <h3>Thaniablaq</h3>
-              <p>Brand Owner</p>
-              <p class="team-bio">
-                Passionate about premium quality and customer satisfaction.
-              </p>
-            </div>
-            <div class="team-member">
-              <div class="team-avatar">CM</div>
-              <h3>Community Manager</h3>
-              <p>Customer Relations</p>
-              <p class="team-bio">
-                Dedicated to providing exceptional customer support and
-                engagement.
-              </p>
+          <div id="team-content" class="team-content" style="display: none">
+            <div class="team-grid">
+              <div class="team-member">
+                <div class="team-avatar">KM</div>
+                <h3>KMONEY</h3>
+                <p>Founder & Designer</p>
+                <p class="team-bio">
+                  Creative mind behind Thaniablaq Hair's vision and design.
+                </p>
+              </div>
+              <div class="team-member">
+                <div class="team-avatar">TH</div>
+                <h3>Thaniablaq</h3>
+                <p>Brand Owner</p>
+                <p class="team-bio">
+                  Passionate about premium quality and customer satisfaction.
+                </p>
+              </div>
+              <div class="team-member">
+                <div class="team-avatar">CM</div>
+                <h3>Community Manager</h3>
+                <p>Customer Relations</p>
+                <p class="team-bio">
+                  Dedicated to providing exceptional customer support and
+                  engagement.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
-      <div class="container">
-        <div class="col">
-          <img
-            src="image/logo_image.jpg"
-            alt="Thaniablaq"
-            class="footer-logo"
-          />
-          <h4>Thaniablaq</h4>
-          <p>Premium-quality hair crafted for confidence and style.</p>
-          <div class="social">
-            <a href="#" aria-label="Instagram"
-              ><img src="image/instagram-fill.svg" alt="Instagram"
-            /></a>
-            <a href="#" aria-label="Facebook"
-              ><img src="image/facebook-circle-fill%20(1).svg" alt="Facebook"
-            /></a>
-            <a href="#" aria-label="TikTok"
-              ><img src="image/tiktok-line%20(1).svg" alt="TikTok"
-            /></a>
-            <a href=" https://wa.me/2347082417100" aria-label="WhatsApp"
-              ><img src="image/whatsapp-fill.svg" alt="WhatsApp"
-            /></a>
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        <div class="container">
+          <div class="col">
+            <img
+              src="image/logo_image.jpg"
+              alt="Thaniablaq"
+              class="footer-logo"
+            />
+            <h4>Thaniablaq</h4>
+            <p>Premium-quality hair crafted for confidence and style.</p>
+            <div class="social">
+              <a href="#" aria-label="Instagram"
+                ><img src="image/instagram-fill.svg" alt="Instagram"
+              /></a>
+              <a href="#" aria-label="Facebook"
+                ><img src="image/facebook-circle-fill%20(1).svg" alt="Facebook"
+              /></a>
+              <a href="#" aria-label="TikTok"
+                ><img src="image/tiktok-line%20(1).svg" alt="TikTok"
+              /></a>
+              <a href=" https://wa.me/2347082417100" aria-label="WhatsApp"
+                ><img src="image/whatsapp-fill.svg" alt="WhatsApp"
+              /></a>
+            </div>
+          </div>
+          <div class="col">
+            <h4>Quick Links</h4>
+            <a href="/">Home</a>
+            <a href="#about">About</a>
+            <a href="#product">Products</a>
+            <a href="/admin">Admin</a>
+          </div>
+          <div class="col newsletter">
+            <h4>Newsletter</h4>
+            <p>Join our mailing list for offers and updates.</p>
+            <div>
+              <input id="footer-email" placeholder="Your email" />
+              <button id="footer-join">Join</button>
+            </div>
           </div>
         </div>
-        <div class="col">
-          <h4>Quick Links</h4>
-          <a href="/">Home</a>
-          <a href="#about">About</a>
-          <a href="#product">Products</a>
-          <a href="/admin">Admin</a>
+        <div style="text-align: center; color: #777; margin-top: 18px">
+          © 2026 Designed by KMONEY
         </div>
-        <div class="col newsletter">
-          <h4>Newsletter</h4>
-          <p>Join our mailing list for offers and updates.</p>
-          <div>
-            <input id="footer-email" placeholder="Your email" />
-            <button id="footer-join">Join</button>
-          </div>
-        </div>
-      </div>
-      <div style="text-align: center; color: #777; margin-top: 18px">
-        © 2026 Designed by KMONEY
-      </div>
-    </footer>
+      </footer>
 
-    <script src="app.js"></script>
+      <script src="app.js"></script>
+    </div>
   </body>
 </html>
