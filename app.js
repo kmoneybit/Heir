@@ -86,6 +86,7 @@ const PRODUCTS_URL = `${API_BASE}/api/products`;
 function createProductCard(p) {
   const card = document.createElement("div");
   card.classList.add("product-card");
+  card.dataset.id = p.id; // store id for cart actions
   const img = p.image || "/image/product-img6.jpg";
   const colorsHtml = (p.colors || [])
     .map(
@@ -104,6 +105,30 @@ function createProductCard(p) {
   return card;
 }
 
+// CART UTILITIES
+function getCart() {
+  try {
+    return JSON.parse(localStorage.getItem("cart") || "[]");
+  } catch {
+    return [];
+  }
+}
+function saveCart(cart) {
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+}
+function updateCartCount() {
+  const countEl = document.getElementById("cart-count");
+  if (countEl) countEl.textContent = getCart().length;
+}
+function addToCart(product) {
+  const cart = getCart();
+  cart.push(product);
+  saveCart(cart);
+  alert(`${product.name} added to cart`);
+}
+
+// load products from backend and render
 async function loadProducts() {
   const container = document.querySelector(".products");
   if (!container) return;
@@ -147,6 +172,7 @@ async function loadProducts() {
 document.addEventListener("DOMContentLoaded", () => {
   loadProducts();
   setupHomeSignup();
+  updateCartCount();
 });
 
 function setupHomeSignup() {
@@ -359,6 +385,23 @@ function setupLoginPage() {
 
 // Admin page setup (manage products)
 function setupAdminPage() {
+  async function loadOrders() {
+    const res = await fetch("/api/orders");
+    const data = await res.json();
+    const tbody = document.getElementById("orders-list");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    data.forEach((o) => {
+      const tr = document.createElement("tr");
+      const itemsList = (o.items || []).map((i) => i.name || "").join(", ");
+      tr.innerHTML = `
+        <td>${o.id}</td>
+        <td>${itemsList}</td>
+        <td>${o.created_at || ""}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
   const list = document.getElementById("list");
   if (!list) return;
 
@@ -417,7 +460,21 @@ function setupAdminPage() {
     createBtn.addEventListener("click", async () => {
       const name = document.getElementById("name").value;
       const price = parseFloat(document.getElementById("price").value) || 0;
-      const image = document.getElementById("image").value || "";
+      // if a file was selected, upload it first
+      const fileInput = document.getElementById("imageFile");
+      let image = document.getElementById("image").value || "";
+      if (fileInput && fileInput.files.length) {
+        const fd = new FormData();
+        fd.append("image", fileInput.files[0]);
+        const r = await fetch("/api/upload", { method: "POST", body: fd });
+        const data = await r.json();
+        if (r.ok && data.path) {
+          image = data.path;
+        } else {
+          alert(data.error || "Image upload failed");
+          return;
+        }
+      }
       const colors = document
         .getElementById("colors")
         .value.split(",")
@@ -448,6 +505,8 @@ function setupAdminPage() {
     });
 
   load();
+  // also pull in orders
+  loadOrders();
 }
 
 // initialize page-specific handlers
@@ -459,6 +518,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Signup handler for site sign-up form (index / signup pages)
 document.addEventListener("click", async (e) => {
+  // handle add to cart
+  if (e.target.classList.contains("add-cart-btn")) {
+    const card = e.target.closest(".product-card");
+    if (!card) return;
+    const id = card.dataset.id;
+    const name = card.querySelector("h1").textContent;
+    const price =
+      parseFloat(card.querySelector("p").textContent.replace("$", "")) || 0;
+    const image = card.querySelector("img").src;
+    addToCart({ id, name, price, image });
+    return;
+  }
+
+  // checkout link
+  if (e.target.id === "view-cart") {
+    e.preventDefault();
+    const cart = getCart();
+    if (cart.length === 0) return alert("Your cart is empty");
+    if (!confirm(`Place order for ${cart.length} item(s)?`)) return;
+    try {
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: cart }),
+      });
+      if (!res.ok) throw new Error("Order failed");
+      alert("Order placed!");
+      saveCart([]);
+    } catch (err) {
+      console.error(err);
+      alert("Could not place order");
+    }
+    return;
+  }
+
   if (!e.target.classList.contains("signup_button")) return;
   // find sign-up inputs inside #sign-up section
   const section = document.querySelector("#sign-up");

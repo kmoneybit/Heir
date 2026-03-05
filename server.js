@@ -41,6 +41,12 @@ db.serialize(() => {
       password TEXT,
       role TEXT
     )`);
+    // orders table stores JSON-encoded cart items and timestamp
+    db.run(`CREATE TABLE orders (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      items TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`);
 
     const stmt = db.prepare(
       "INSERT INTO products (name, price, image, colors) VALUES (?,?,?,?)",
@@ -305,6 +311,31 @@ app.post("/api/products", requireAdmin, (req, res) => {
       res.json({ id: this.lastID });
     },
   );
+});
+
+// orders API
+app.get("/api/orders", requireAdmin, (req, res) => {
+  db.all("SELECT * FROM orders ORDER BY created_at DESC", (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    // parse JSON items for convenience
+    const out = rows.map((r) => ({
+      id: r.id,
+      items: JSON.parse(r.items || "[]"),
+      created_at: r.created_at,
+    }));
+    res.json(out);
+  });
+});
+
+app.post("/api/orders", async (req, res) => {
+  const { items } = req.body;
+  if (!Array.isArray(items) || items.length === 0)
+    return res.status(400).json({ error: "No items provided" });
+  const itemsStr = JSON.stringify(items);
+  db.run("INSERT INTO orders (items) VALUES (?)", [itemsStr], function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ id: this.lastID });
+  });
 });
 
 // endpoint for uploading product images
