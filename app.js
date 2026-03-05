@@ -1,3 +1,4 @@
+const hamIcon = document.querySelector(".ham_icon");
 const navLinks = document.querySelector(".navLinks");
 
 if (hamIcon && navLinks) {
@@ -103,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadProducts();
   setupHomeSignup();
   updateCartCount();
+  setupTeamToggle();
 });
 
 function setupHomeSignup() {
@@ -522,17 +524,19 @@ document.addEventListener("click", async (e) => {
   }
 });
 
-// Team Toggle Functionality
-const teamToggleBtn = document.getElementById("team-toggle");
-const teamContent = document.getElementById("team-content");
+// Team Toggle Functionality - moved inside DOMContentLoaded
+function setupTeamToggle() {
+  const teamToggleBtn = document.getElementById("team-toggle");
+  const teamContent = document.getElementById("team-content");
 
-if (teamToggleBtn) {
-  teamToggleBtn.addEventListener("click", () => {
-    const isHidden = teamContent.style.display === "none";
-    teamContent.style.display = isHidden ? "block" : "none";
-    teamToggleBtn.textContent = isHidden ? "Hide Team" : "Show Team";
-    teamToggleBtn.style.background = isHidden
-      ? "linear-gradient(135deg, #ff7700 0%, #ff6600 100%)"
-      : "linear-gradient(135deg, #ff8c00 0%, #ff7700 100%)";
-  });
+  if (teamToggleBtn && teamContent) {
+    teamToggleBtn.addEventListener("click", () => {
+      const isHidden = teamContent.style.display === "none";
+      teamContent.style.display = isHidden ? "block" : "none";
+      teamToggleBtn.textContent = isHidden ? "Hide Team" : "Show Team";
+      teamToggleBtn.style.background = isHidden
+        ? "linear-gradient(135deg, #ff7700 0%, #ff6600 100%)"
+        : "linear-gradient(135deg, #ff8c00 0%, #ff7700 100%)";
+    });
+  }
 }

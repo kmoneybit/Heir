@@ -82,6 +82,7 @@ db.serialize(() => {
   db.run("ALTER TABLE users ADD COLUMN phone TEXT", (err) => {
     // ignore error if column exists
   });
+  
   // ensure otps table exists for phone verification
   db.run(
     `CREATE TABLE IF NOT EXISTS otps (
@@ -91,9 +92,38 @@ db.serialize(() => {
     expires_at INTEGER
   )`,
     () => {
-      // Start server only after DB is fully initialized
-      const PORT = process.env.PORT || 3000;
-      app.listen(PORT, () => console.log("Server running on port", PORT));
+      // Check if products table is empty and seed if needed
+      db.get("SELECT COUNT(*) as count FROM products", (err, row) => {
+        if (err || (row && row.count === 0)) {
+          // Seed sample products if table is empty
+          const stmt = db.prepare(
+            "INSERT INTO products (name, price, image, colors) VALUES (?,?,?,?)",
+          );
+          stmt.run(
+            "Premium Straight",
+            30.0,
+            "/image/product-img6.jpg",
+            JSON.stringify(["brown", "black", "gold", "grey"]),
+          );
+          stmt.run(
+            "Glam Curls",
+            45.0,
+            "/image/product-img6.jpg",
+            JSON.stringify(["black", "brown"]),
+          );
+          stmt.run(
+            "Natural Waves",
+            35.0,
+            "/image/product-img6.jpg",
+            JSON.stringify(["black", "dark brown"]),
+          );
+          stmt.finalize();
+        }
+        
+        // Start server only after DB is fully initialized
+        const PORT = process.env.PORT || 3000;
+        app.listen(PORT, () => console.log("Server running on port", PORT));
+      });
     },
   );
 });
