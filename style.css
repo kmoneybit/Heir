@@ -487,7 +487,128 @@ header {
   text-decoration: underline;
 }
 
-/* ================= FOOTER ================= */
+/* ================= TEAM SECTION ================= */
+.team-section {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+  text-align: center;
+}
+
+.team-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-title {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.team-toggle-btn {
+  padding: 13px 32px;
+  background: linear-gradient(135deg, #ff8c00 0%, #ff7700 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+  margin-bottom: 40px;
+}
+
+.team-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+  background: linear-gradient(135deg, #ff7700 0%, #ff6600 100%);
+}
+
+.team-toggle-btn:active {
+  transform: translateY(0);
+}
+
+.team-content {
+  animation: slideInDown 0.4s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.team-member {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+.team-avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, #ff8c00 0%, #ff7700 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.team-member h3 {
+  font-size: 1.4rem;
+  color: #1a1a1a;
+  margin-bottom: 5px;
+}
+
+.team-member p {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.team-bio {
+  font-size: 0.9rem;
+  color: #999;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .team-title {
+    font-size: 1.8rem;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
 footer {
   text-align: center;
   padding: 25px;
