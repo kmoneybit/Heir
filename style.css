@@ -669,6 +669,11 @@ html.dark-mode #main-content .theme-toggle-btn:hover {
   border-color: rgba(255, 215, 0, 0.5);
 }
 
+/* Prevent hero background image from being inverted */
+html.dark-mode #main-content .heroSection {
+  filter: invert(1);
+}
+
 /* ================= FOOTER ================= */
 footer {
   text-align: center;
