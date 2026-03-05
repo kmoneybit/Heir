@@ -1,3 +1,70 @@
+// ================= LIGHT/DARK MODE THEME TOGGLE =================
+// This code manages the Light Mode and Dark Mode theme switching functionality
+// When toggled, colors are completely inverted - black becomes white, white becomes black
+
+// STEP 1: Initialize theme on page load
+// Check localStorage for saved theme preference, default to 'light' mode
+function initializeTheme() {
+  // Retrieve the saved theme from localStorage
+  const savedTheme = localStorage.getItem("themeMode");
+
+  // Get the current theme (saved or default to 'light')
+  const currentTheme = savedTheme || "light";
+
+  // Apply the saved theme to the page
+  applyTheme(currentTheme);
+}
+
+// STEP 2: Apply theme by inverting colors or keeping normal
+// This function updates the page appearance based on the theme
+function applyTheme(theme) {
+  const htmlElement = document.documentElement;
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  const themeIcon = document.querySelector(".theme-icon");
+
+  if (theme === "dark") {
+    // Dark mode: invert all colors (black becomes white, white becomes black)
+    htmlElement.classList.add("dark-mode");
+    // Update button icon from moon to sun when in dark mode
+    if (themeIcon) themeIcon.textContent = "☀️";
+    // Save preference to localStorage
+    localStorage.setItem("themeMode", "dark");
+  } else {
+    // Light mode: normal colors
+    htmlElement.classList.remove("dark-mode");
+    // Update button icon from sun to moon when in light mode
+    if (themeIcon) themeIcon.textContent = "🌙";
+    // Save preference to localStorage
+    localStorage.setItem("themeMode", "light");
+  }
+}
+
+// STEP 3: Get the toggle button and add click event listener
+const themeToggleBtn = document.getElementById("theme-toggle");
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", () => {
+    // Get the current theme from the HTML element
+    const htmlElement = document.documentElement;
+    const isDarkMode = htmlElement.classList.contains("dark-mode");
+
+    // Toggle: if dark mode is ON, switch to light; if OFF, switch to dark
+    const newTheme = isDarkMode ? "light" : "dark";
+
+    // Apply the new theme
+    applyTheme(newTheme);
+  });
+}
+
+// STEP 4: Run initialization when the DOM is ready
+// This ensures the theme is applied before the page is fully rendered
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeTheme);
+} else {
+  // If DOM is already loaded, apply theme immediately
+  initializeTheme();
+}
+
 // ================= END OF THEME TOGGLE CODE =================
 
 const hamIcon = document.querySelector(".ham_icon");
