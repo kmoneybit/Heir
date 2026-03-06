@@ -1,4 +1,4 @@
-const hamIcon = document.querySelector(".ham_icon");
+const hamIcon = document.querySelector("#hamburger");
 const navLinks = document.querySelector(".navLinks");
 
 if (hamIcon && navLinks) {
