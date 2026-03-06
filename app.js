@@ -76,12 +76,10 @@ async function loadProducts() {
     products.forEach((p) => container.appendChild(createProductCard(p)));
   } catch (e) {
     console.error("Product load error:", e);
-    // friendly message with a hint and fallback sample
     container.innerHTML = `
       <p style="color:#666">Could not load products from ${PRODUCTS_URL}.</p>
       <p style="color:#666">Make sure the dev server is running: <code>npm start</code></p>
     `;
-    // fallback sample products so the page isn't blank
     const fallback = [
       {
         name: "Sample Straight",
@@ -127,7 +125,6 @@ function setupHomeSignup() {
     }),
   );
 
-  // homepage send OTP
   const sendBtn = section.querySelector("#home-send-otp");
   if (sendBtn)
     sendBtn.addEventListener("click", async () => {
@@ -152,7 +149,6 @@ function setupHomeSignup() {
       }
     });
 
-  // homepage verify OTP
   const verifyBtn = section.querySelector("#home-verify-otp");
   if (verifyBtn)
     verifyBtn.addEventListener("click", async () => {
@@ -171,18 +167,14 @@ function setupHomeSignup() {
         });
         const data = await res.json();
         if (!res.ok) return alert(data.error || "Verification failed");
-        // success — user is logged in via session
         location.href = "/";
       } catch (e) {
         console.error(e);
         alert("Verification error");
       }
     });
-
-  // homepage email register handled by existing delegated handler when user clicks #home-signup (class signup_button)
 }
 
-// Signup page (signup.html) handlers previously inline
 function setupSignupPage() {
   const section = document.querySelector("#sign-up");
   if (!section) return;
@@ -286,7 +278,6 @@ function setupSignupPage() {
     });
 }
 
-// Generic login page handler for /login.html and /admin-login.html
 function setupLoginPage() {
   const btn = document.getElementById("login");
   if (!btn) return;
@@ -305,7 +296,6 @@ function setupLoginPage() {
           data.error || "Login failed";
         return;
       }
-      // if admin, redirect to /admin otherwise home
       if (data.role === "admin") location.href = "/admin";
       else location.href = "/";
     } catch (e) {
@@ -315,7 +305,6 @@ function setupLoginPage() {
   });
 }
 
-// Admin page setup (manage products)
 function setupAdminPage() {
   async function loadOrders() {
     const res = await fetch("/api/orders");
@@ -396,7 +385,6 @@ function setupAdminPage() {
     createBtn.addEventListener("click", async () => {
       const name = document.getElementById("name").value;
       const price = parseFloat(document.getElementById("price").value) || 0;
-      // if a file was selected, upload it first
       const fileInput = document.getElementById("imageFile");
       let image = document.getElementById("image").value || "";
       if (fileInput && fileInput.files.length) {
@@ -441,7 +429,6 @@ function setupAdminPage() {
     });
 
   load();
-  // also pull in orders
   loadOrders();
 }
 
@@ -452,7 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupAdminPage();
 });
 
-// Signup handler for site sign-up form (index / signup pages)
+// Delegated click handler fixes
 document.addEventListener("click", async (e) => {
   // handle add to cart
   if (e.target.classList.contains("add-cart-btn")) {
@@ -467,64 +454,67 @@ document.addEventListener("click", async (e) => {
     return;
   }
 
-  const section = document.querySelector("#sign-up");
-  if (!section) return;
-  const emailInput = section.querySelector(
-    'input[type="text"], input[placeholder*="Email"]',
-  );
-  const passInput = section.querySelector('input[type="password"]');
-  const email = emailInput ? emailInput.value.trim() : null;
-  const password = passInput ? passInput.value.trim() : null;
-  if (!email || !password) {
-    alert("Please provide email and password");
-    return;
+  // Signup buttons
+  if (e.target.id === "home-signup" || e.target.id === "signup") {
+    const section = document.querySelector("#sign-up");
+    if (!section) return;
+    const emailInput = section.querySelector(
+      'input[type="text"], input[placeholder*="Email"]',
+    );
+    const passInput = section.querySelector('input[type="password"]');
+    const email = emailInput ? emailInput.value.trim() : null;
+    const password = passInput ? passInput.value.trim() : null;
+
+    if (!email || !password) {
+      alert("Please provide email and password");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) return alert(data.error || "Registration failed");
+      location.href = "/";
+    } catch (err) {
+      console.error(err);
+      alert("Registration error");
+    }
   }
-  try {
-    const res = await fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (!res.ok) return alert(data.error || "Registration failed");
-    // on success, redirect to home
-    location.href = "/";
-  } catch (err) {
-    console.error(err);
-    alert("Registration error");
+
+  // Login button
+  if (e.target.classList.contains("login_button")) {
+    const section = document.querySelector("#login");
+    if (!section) return;
+    const emailInput = section.querySelector("#login-email");
+    const passInput = section.querySelector("#login-password");
+    const email = emailInput ? emailInput.value.trim() : null;
+    const password = passInput ? passInput.value.trim() : null;
+
+    if (!email || !password) {
+      alert("Please provide email and password");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/api/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) return alert(data.error || "Login failed");
+      location.href = "/";
+    } catch (err) {
+      console.error(err);
+      alert("Login error");
+    }
   }
 });
 
-// Login handler for homepage login section
-document.addEventListener("click", async (e) => {
-  if (!e.target.classList.contains("login_button")) return;
-  const section = document.querySelector("#login");
-  if (!section) return;
-  const emailInput = section.querySelector("#login-email");
-  const passInput = section.querySelector("#login-password");
-  const email = emailInput ? emailInput.value.trim() : null;
-  const password = passInput ? passInput.value.trim() : null;
-  if (!email || !password) {
-    alert("Please provide email and password");
-    return;
-  }
-  try {
-    const res = await fetch(`${API_BASE}/api/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (!res.ok) return alert(data.error || "Login failed");
-    // reload to get session state
-    location.href = "/";
-  } catch (err) {
-    console.error(err);
-    alert("Login error");
-  }
-});
-
-// Team Toggle Functionality - moved inside DOMContentLoaded
 function setupTeamToggle() {
   const teamToggleBtn = document.getElementById("team-toggle");
   const teamContent = document.getElementById("team-content");
