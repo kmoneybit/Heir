@@ -154,5 +154,127 @@
     </footer>
 
     <script src="/app.js"></script>
+    <script>// ===== PRODUCTS STORAGE =====
+
+function getProducts() {
+  const products = localStorage.getItem("products");
+  return products ? JSON.parse(products) : [];
+}
+
+function saveProducts(products) {
+  localStorage.setItem("products", JSON.stringify(products));
+}
+
+
+
+// ===== ADMIN PANEL =====
+
+const createBtn = document.getElementById("create");
+const list = document.getElementById("list");
+
+if (createBtn) {
+  const nameInput = document.getElementById("name");
+  const priceInput = document.getElementById("price");
+  const imageInput = document.getElementById("image");
+  const colorsInput = document.getElementById("colors");
+
+  function renderProducts() {
+    const products = getProducts();
+
+    list.innerHTML = "";
+
+    products.forEach((product, index) => {
+      const tr = document.createElement("tr");
+
+      tr.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${product.name}</td>
+        <td>$${product.price}</td>
+        <td>${product.colors}</td>
+        <td>
+          <button class="action-btn del-btn" onclick="deleteProduct(${index})">
+            Delete
+          </button>
+        </td>
+      `;
+
+      list.appendChild(tr);
+    });
+  }
+
+  createBtn.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    const price = priceInput.value.trim();
+    const image = imageInput.value.trim();
+    const colors = colorsInput.value.trim();
+
+    if (!name || !price || !image) {
+      alert("Please fill all required fields");
+      return;
+    }
+
+    const products = getProducts();
+
+    products.push({
+      name,
+      price,
+      image,
+      colors
+    });
+
+    saveProducts(products);
+
+    nameInput.value = "";
+    priceInput.value = "";
+    imageInput.value = "";
+    colorsInput.value = "";
+
+    renderProducts();
+  });
+
+  window.deleteProduct = function (index) {
+    const products = getProducts();
+
+    products.splice(index, 1);
+
+    saveProducts(products);
+
+    renderProducts();
+  };
+
+  renderProducts();
+}
+
+
+
+// ===== HOMEPAGE PRODUCTS =====
+
+const productContainer = document.getElementById("product-container");
+
+if (productContainer) {
+  function loadProducts() {
+    const products = getProducts();
+
+    productContainer.innerHTML = "";
+
+    products.forEach(product => {
+      const div = document.createElement("div");
+
+      div.className = "product-card";
+
+      div.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>$${product.price}</p>
+        <small>${product.colors}</small>
+      `;
+
+      productContainer.appendChild(div);
+    });
+  }
+
+  loadProducts();
+}
+    </script>
   </body>
 </html>

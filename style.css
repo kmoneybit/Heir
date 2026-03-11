@@ -121,7 +121,7 @@ header {
   font-weight: 700;
   transition:
     transform 0.18s ease,
-    background 0.18s ease,
+     background 0.18s ease, 
     box-shadow 0.18s ease;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
@@ -717,10 +717,12 @@ footer {
 /* ================= RESPONSIVE DESIGN ================= */
 
 /* Tablet */
-@media (max-width: 992px) {
+@media (max-width: 768px) {
   .products {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    padding: 60px 20px;
   }
+
 
   header {
     padding: 15px 20px;
