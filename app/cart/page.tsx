@@ -18,80 +18,85 @@ export default function CartPage() {
   };
 
   return (
-    <section className="cart-section" style={{ padding: "120px 40px 80px", maxWidth: "1000px", margin: "0 auto", minHeight: "70vh" }}>
-      <h1 style={{ marginBottom: "20px", color: "black", fontSize: "2.5rem" }}>Shopping Cart</h1>
+    <section className="pt-40 pb-32 px-6 md:px-10 max-w-7xl mx-auto min-h-[70vh]">
+      <h1 className="text-4xl md:text-6xl font-black mb-12 text-black tracking-tight">Shopping Cart</h1>
 
       {cart.length === 0 ? (
-        <div className="cart-empty" style={{ textAlign: "center", padding: "40px", color: "gray" }}>
-          <p>Your cart is empty</p>
-          <Link href="/" style={{ color: "#ff8c00", textDecoration: "none" }}>
+        <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-100">
+          <p className="text-gray-400 text-xl mb-6">Your cart is empty</p>
+          <Link href="/" className="inline-block px-8 py-3 bg-orange-500 text-white rounded-lg no-underline font-bold transition-all hover:bg-[#ffb347] shadow-lg shadow-orange-100">
             Continue Shopping
           </Link>
         </div>
       ) : (
-        <>
-          <table className="cart-table" style={{ width: "100%", borderCollapse: "collapse", background: "white", boxShadow: "0 4px 12px rgba(0,0,0,0.08)", borderRadius: "8px", overflow: "hidden", marginBottom: "20px" }}>
-            <thead style={{ background: "#222", color: "white" }}>
-              <tr>
-                <th style={{ padding: "15px", textAlign: "left" }}>Product</th>
-                <th style={{ padding: "15px", textAlign: "left" }}>Price</th>
-                <th style={{ padding: "15px", textAlign: "left" }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart.map((item, index) => (
-                <tr key={index} style={{ borderBottom: "1px solid #eee" }}>
-                  <td style={{ padding: "15px" }}>
-                    <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                      <Image
-                        src={item.image || "/image/product-img6.jpg"}
-                        alt={item.name}
-                        width={60}
-                        height={60}
-                        style={{ objectFit: "cover", borderRadius: "4px" }}
-                      />
-                      <span>{item.name}</span>
-                    </div>
-                  </td>
-                  <td style={{ padding: "15px" }}>₦{Number(item.price).toLocaleString()}</td>
-                  <td style={{ padding: "15px" }}>
-                    <button
-                      onClick={() => removeFromCart(index)}
-                      style={{ background: "#ff4d4d", color: "white", border: "none", padding: "8px 12px", borderRadius: "4px", cursor: "pointer" }}
-                    >
-                      Remove
-                    </button>
-                  </td>
+        <div className="space-y-8">
+          <div className="overflow-x-auto rounded-2xl shadow-sm border border-gray-100 bg-white">
+            <table className="w-full border-collapse">
+              <thead className="bg-black text-white">
+                <tr>
+                  <th className="p-5 text-left font-bold uppercase tracking-wider text-sm">Product</th>
+                  <th className="p-5 text-left font-bold uppercase tracking-wider text-sm">Price</th>
+                  <th className="p-5 text-left font-bold uppercase tracking-wider text-sm">Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {cart.map((item, index) => (
+                  <tr key={index} className="transition-colors hover:bg-gray-50/50">
+                    <td className="p-5">
+                      <div className="flex items-center gap-4">
+                        <Image
+                          src={item.image || "/image/product-img6.jpg"}
+                          alt={item.name}
+                          width={64}
+                          height={64}
+                          className="w-16 h-16 object-cover rounded-lg shadow-sm"
+                        />
+                        <span className="font-bold text-gray-900">{item.name}</span>
+                      </div>
+                    </td>
+                    <td className="p-5 text-lg font-medium text-gray-700">NGN {Number(item.price).toLocaleString()}</td>
+                    <td className="p-5">
+                      <button
+                        onClick={() => removeFromCart(index)}
+                        className="bg-red-500 text-white border-none px-5 py-2 rounded-lg font-bold cursor-pointer transition-all hover:bg-red-600 active:scale-95 shadow-md shadow-red-100"
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-          <div className="cart-summary" style={{ display: "flex", justifyContent: "flex-end", gap: "20px", marginBottom: "20px" }}>
-            <div className="summary-box" style={{ background: "#f5f5f5", padding: "20px", borderRadius: "8px", minWidth: "250px" }}>
-              <h3 style={{ margin: "0 0 10px 0", fontSize: "1rem", color: "#666" }}>Total Items: {cart.length}</h3>
-              <h3 style={{ margin: "0 0 10px 0", fontSize: "1rem", color: "#666" }}>Total Price</h3>
-              <div className="summary-total" style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#ff8c00" }}>
-                ₦{Number(total).toLocaleString()}
+          <div className="flex justify-end pr-2">
+            <div className="bg-gray-50 p-8 rounded-2xl min-w-[300px] border border-gray-100">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-gray-500 text-sm font-bold uppercase tracking-wider">Total Items</span>
+                <span className="text-gray-900 font-bold">{cart.length}</span>
+              </div>
+              <div className="flex justify-between items-center pt-4 border-t border-gray-200">
+                <span className="text-gray-900 font-bold text-lg">Total Price</span>
+                <span className="text-3xl font-black text-orange-500">NGN {Number(total).toLocaleString()}</span>
               </div>
             </div>
           </div>
 
-          <div className="cart-actions" style={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-end pt-4">
             <Link
               href="/"
-              style={{ padding: "12px 24px", borderRadius: "6px", fontWeight: "bold", textDecoration: "none", background: "#ddd", color: "#222", textAlign: "center" }}
+              className="px-10 py-4 rounded-xl font-bold no-underline bg-gray-100 text-gray-700 text-center transition-all hover:bg-gray-200"
             >
               Continue Shopping
             </Link>
             <button
               onClick={handleCheckout}
-              style={{ padding: "12px 24px", border: "none", borderRadius: "6px", fontSize: "1rem", fontWeight: "bold", cursor: "pointer", background: "#ff8c00", color: "white" }}
+              className="px-10 py-4 bg-orange-500 text-black border-none rounded-xl font-black text-lg transition-all hover:bg-[#ffb347] hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-orange-100"
             >
               Proceed to Checkout
             </button>
           </div>
-        </>
+        </div>
       )}
     </section>
   );

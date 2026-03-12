@@ -7,8 +7,6 @@ import { Product } from "./context/CartContext";
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [teamVisible, setTeamVisible] = useState(false);
-  const [method, setMethod] = useState("email");
 
   useEffect(() => {
     async function fetchProducts() {
@@ -16,9 +14,10 @@ export default function Home() {
         const res = await fetch("/api/products");
         if (!res.ok) throw new Error("Failed to load");
         const data = await res.json();
-        setProducts(data);
+        // Just show first 4 products as "Featured"
+        setProducts(data.slice(0, 4));
       } catch {
-        // Fallback
+        // Fallback featured products
         setProducts([
           {
             id: 1,
@@ -43,191 +42,139 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       {/* HERO SECTION */}
-      <section className="heroSection">
-        <div className="hero-text">
-          <h1 style={{ fontSize: "60px" }}>Welcome To Thaniablaq Hair</h1>
-          <p>Premium quality hair for confident, beautiful women</p>
-          <Link className="btn-shop" href="#product">
-            Shop Now
+      <section className="relative min-h-screen bg-[#0b0b0f] text-white flex justify-center items-center overflow-hidden">
+        {/* Background Image with optimized blend */}
+        <div 
+          className="absolute inset-0 z-0 bg-center bg-cover bg-no-repeat opacity-30 grayscale-[35%]"
+          style={{ backgroundImage: "url('/image/hero-image.jpg')" }}
+        ></div>
+        
+        {/* Subtle Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/80 z-0"></div>
+
+        <div className="max-w-4xl px-6 relative z-10 text-center flex flex-col items-center">
+          <span className="text-[11px] md:text-xs font-black uppercase tracking-[0.3em] text-white/60 mb-6 opacity-0 translate-y-4 animate-[fadeUp_0.8s_ease_forwards]">
+            Your Hair, Your Statement
+          </span>
+          
+          <h1 className="text-[2.5rem] md:text-[5.5rem] leading-[1.1] font-black text-white mb-8 tracking-[-0.03em] opacity-0 translate-y-8 animate-[fadeUp_1s_0.2s_ease_forwards]">
+            Make a bold look with <br className="hidden md:block" />
+            your attractive hair style!
+          </h1>
+          
+          <p className="text-base md:text-xl text-white/70 max-w-2xl leading-relaxed mb-12 opacity-0 translate-y-8 animate-[fadeUp_1s_0.4s_ease_forwards] font-medium">
+            Discover premium hair designed to match your style, boost your 
+            confidence, and let you express yourself effortlessly.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 mb-14 opacity-0 translate-y-8 animate-[fadeUp_1s_0.6s_ease_forwards]">
+            <Link 
+              className="px-10 py-5 bg-[#d78455] text-black rounded-2xl no-underline font-black text-lg shadow-xl shadow-black/30 hover:bg-[#c06a3b] transition-all hover:-translate-y-1 active:scale-95" 
+              href="/shop"
+            >
+              Classic Collection
+            </Link>
+            <Link 
+              className="px-10 py-5 bg-white/10 text-white rounded-2xl no-underline font-black text-lg border border-white/20 shadow-xl shadow-black/30 hover:bg-white/20 transition-all hover:-translate-y-1 active:scale-95" 
+              href="/shop"
+            >
+              Luxury Collection
+            </Link>
+          </div>
+
+          {/* Social Proof Section */}
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 opacity-0 translate-y-8 animate-[fadeUp_1s_0.8s_ease_forwards]">
+            <div className="flex flex-col items-center md:items-start">
+              <div className="flex items-center gap-1.5 mb-1.5">
+                <span className="text-lg font-black text-white">Ratings</span>
+                <svg viewBox="0 0 24 24" className="w-5 h-5 text-amber-400" fill="currentColor" aria-hidden="true">
+                  <path d="M12 3.5l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17.7 6.6 20.3l1-6.1-4.4-4.3 6.1-.9L12 3.5z" />
+                </svg>
+                <span className="text-lg font-black text-white">5.0</span>
+              </div>
+              <p className="text-xs font-bold text-white/60 uppercase tracking-widest px-1">Trusted by 4k+ Clients</p>
+            </div>
+            
+            <div className="flex -space-x-4">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="w-14 h-14 rounded-full border-4 border-white/40 overflow-hidden shadow-lg shadow-black/40">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={`https://i.pravatar.cc/150?u=${i+10}`} alt="User" className="w-full h-full object-cover" />
+                </div>
+              ))}
+              <div className="w-14 h-14 rounded-full border-4 border-white/40 bg-black flex items-center justify-center text-white text-[10px] font-black shadow-lg shadow-black/40">
+                +4k
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Floating Decorative Elements */}
+        <div className="absolute top-1/4 -left-20 w-64 h-64 bg-orange-500/15 rounded-full blur-3xl z-0"></div>
+        <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-rose-500/15 rounded-full blur-3xl z-0"></div>
+      </section>
+
+      {/* ABOUT TEASER */}
+      <section className="py-32 px-6 text-center bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tight text-gray-900">Our Story</h2>
+          <p className="max-w-3xl mx-auto leading-relaxed text-gray-600 text-xl font-medium mb-10">
+            At Thaniablaq, we are passionate about providing premium-quality hair
+            that reflects elegance, confidence, and timeless beauty. We carefully select the finest collections to enhance natural beauty...
+          </p>
+          <Link href="/about" className="inline-flex items-center gap-2 text-orange-500 font-black no-underline text-xl hover:translate-x-2 transition-all group">
+            Read Our Full Story <span className="transition-transform group-hover:translate-x-1">→</span>
           </Link>
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" className="about-section">
-        <h2>About Us</h2>
-        <p>
-          At Thaniablaq, we are passionate about providing premium-quality hair
-          that reflects elegance, confidence, and timeless beauty. Hair is more
-          than a style — it is an expression of personality and confidence. We
-          carefully select the finest collections to enhance natural beauty. Our
-          products are soft, durable, and easy to maintain for long-lasting
-          satisfaction. Whether you prefer sleek straight styles, glamorous
-          curls, or natural textures, we deliver hair that helps you look and
-          feel your best.
-        </p>
-      </section>
-
-      <h1
-        id="product"
-        style={{
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-          color: "orange",
-        }}
-      >
-        PRODUCTS
-      </h1>
-      <section className="products">
-        {loading ? (
-          <p style={{ color: "#666" }}>Loading products...</p>
-        ) : products.length === 0 ? (
-          <p style={{ color: "#666" }}>No products available.</p>
-        ) : (
-          products.map((p) => <ProductCard key={p.id} product={p} />)
-        )}
-      </section>
-
-      {/* SIGN UP */}
-      <section id="sign-up" className="auth-section sign-up">
-        <div className="auth-container">
-          <div className="auth-card">
-            <h2 className="auth-title">Create Account</h2>
-            <p className="auth-subtitle">Join our community for exclusive offers</p>
-
-            <div className="method-selector">
-              <label className="method-label">
-                <input
-                  type="radio"
-                  name="method"
-                  value="email"
-                  checked={method === "email"}
-                  onChange={() => setMethod("email")}
-                />
-                <span>Email</span>
-              </label>
-              <label className="method-label">
-                <input
-                  type="radio"
-                  name="method"
-                  value="phone"
-                  checked={method === "phone"}
-                  onChange={() => setMethod("phone")}
-                />
-                <span>Phone</span>
-              </label>
-            </div>
-
-            {method === "email" && (
-              <div id="email-block" className="form-block">
-                <div className="form-group">
-                  <input type="email" placeholder="Email Address" className="form-input" />
-                </div>
-                <div className="form-group">
-                  <input type="password" placeholder="Password" className="form-input" />
-                </div>
-                <button className="btn-primary btn-full">Create Account</button>
-              </div>
+      {/* FEATURED PRODUCTS */}
+      <section className="py-32 px-6 bg-gray-50/50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-center text-4xl md:text-6xl font-black mb-16 tracking-tight text-gray-900">Featured Products</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            {loading ? (
+              <p className="text-center w-full col-span-full py-20 text-gray-400 font-medium text-xl">Loading products...</p>
+            ) : (
+              products.map((p) => <ProductCard key={p.id} product={p} />)
             )}
-
-            {method === "phone" && (
-              <div id="phone-block" className="form-block">
-                <div className="form-group">
-                  <input
-                    type="tel"
-                    placeholder="Phone number (e.g. +15551234567)"
-                    className="form-input"
-                  />
-                </div>
-                <button className="btn-primary btn-full">
-                  Send Verification Code
-                </button>
-              </div>
-            )}
-
-            <p className="auth-link">
-              Already have an account? <Link href="#login">Sign in here</Link>
-            </p>
+          </div>
+          <div className="text-center mt-20">
+            <Link href="/shop" className="inline-block px-12 py-5 border-2 border-black text-black rounded-2xl no-underline font-black text-lg transition-all duration-300 hover:bg-black hover:text-white shadow-xl shadow-gray-200">
+              View All Products
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* LOGIN (homepage) */}
-      <section id="login" className="auth-section login-section">
-        <div className="auth-container">
-          <div className="auth-card">
-            <h2 className="auth-title">Sign In</h2>
-            <p className="auth-subtitle">Welcome back to Thaniablaq Hair</p>
-
-            <div className="form-group">
-              <input type="email" placeholder="Email Address" className="form-input" />
-            </div>
-            <div className="form-group">
-              <input type="password" placeholder="Password" className="form-input" />
-            </div>
-
-            <button className="login_button btn-primary btn-full">Sign In</button>
-
-            <p className="auth-link">
-              <Link href="#sign-up">Don&apos;t have an account? Sign up</Link>
-            </p>
-            <p style={{ textAlign: "center", marginTop: "16px", fontSize: "0.9rem", color: "#999" }}>
-              <Link href="/login" className="auth-link-secondary">
-                Or open full login page
-              </Link>
-            </p>
-          </div>
+      {/* CALL TO ACTION */}
+      <section className="py-32 px-6 bg-black text-white text-center relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-500/10 rounded-full -ml-32 -mb-32 blur-3xl"></div>
+        
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tight">Ready for a new look?</h2>
+          <p className="text-xl md:text-2xl mb-12 text-gray-400 leading-relaxed">Join thousands of women who trust Thaniablaq for their premium hair needs.</p>
+          <Link href="/signup" className="inline-block px-12 py-5 bg-orange-500 text-black rounded-2xl no-underline font-black text-xl shadow-2xl shadow-orange-500/20 transition-all duration-300 hover:bg-[#ffb347] hover:-translate-y-1 hover:shadow-orange-500/40 active:scale-95">
+            Create Account Now
+          </Link>
         </div>
       </section>
 
-      {/* TEAM SECTION */}
-      <section id="team" className="team-section">
-        <div className="team-container">
-          <h2 className="team-title">Meet Our Team</h2>
-          <button
-            id="team-toggle"
-            className="team-toggle-btn"
-            onClick={() => setTeamVisible(!teamVisible)}
-          >
-            {teamVisible ? "Hide Team" : "Show Team"}
-          </button>
-
-          {teamVisible && (
-            <div id="team-content" className="team-content">
-              <div className="team-grid">
-                <div className="team-member">
-                  <div className="team-avatar">KM</div>
-                  <h3>KMONEY</h3>
-                  <p>Founder & Designer</p>
-                  <p className="team-bio">
-                    Creative mind behind Thaniablaq Hair&apos;s vision and design.
-                  </p>
-                </div>
-                <div className="team-member">
-                  <div className="team-avatar">TH</div>
-                  <h3>Thaniablaq</h3>
-                  <p>Brand Owner</p>
-                  <p className="team-bio">
-                    Passionate about premium quality and customer satisfaction.
-                  </p>
-                </div>
-                <div className="team-member">
-                  <div className="team-avatar">CM</div>
-                  <h3>Community Manager</h3>
-                  <p>Customer Relations</p>
-                  <p className="team-bio">
-                    Dedicated to providing exceptional customer support and
-                    engagement.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+      <style jsx global>{`
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(2rem);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </main>
   );
 }

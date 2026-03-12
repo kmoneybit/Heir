@@ -49,130 +49,156 @@ export default function PaymentPage() {
     }
   };
 
-  if (loading) return <div style={{ paddingTop: "120px", textAlign: "center" }}>Loading...</div>;
+  if (loading) return <div className="pt-32 text-center text-gray-500 font-medium">Loading checkout...</div>;
 
   return (
-    <div style={{ paddingTop: "120px", paddingBottom: "80px", maxWidth: "600px", margin: "auto" }}>
-      <div className="payment-container" style={{ padding: "40px", background: "white", borderRadius: "12px", boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}>
-        <h1 style={{ marginBottom: "20px" }}>Payment</h1>
+    <div className="pt-40 pb-32 px-6 bg-gray-50/30 min-h-screen">
+      <div className="max-w-3xl mx-auto bg-white p-10 md:p-16 rounded-[2.5rem] shadow-2xl shadow-gray-200/50 border border-gray-100">
+        <h1 className="text-4xl font-black mb-10 text-gray-900 tracking-tight">Checkout</h1>
 
         {cart.length === 0 ? (
-          <div className="order-summary" style={{ background: "#f5f5f5", padding: "15px", borderRadius: "8px", marginBottom: "20px" }}>
-            <p>
-              No items in cart. <Link href="/" style={{ color: "#ff8c00" }}>Go back to shop</Link>
+          <div className="bg-orange-50 p-6 rounded-2xl border border-orange-100 mb-8">
+            <p className="text-orange-800 font-medium">
+              No items in cart. <Link href="/" className="text-orange-600 font-bold hover:underline">Go back to shop</Link>
             </p>
           </div>
         ) : (
           <>
-            <div className="order-summary" style={{ background: "#f5f5f5", padding: "15px", borderRadius: "8px", marginBottom: "20px" }}>
-              <h3>Order Summary</h3>
-              {cart.map((item, index) => (
-                <div key={index} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid #ddd" }}>
-                  <span>{item.name} x1</span>
-                  <span>₦{Number(item.price).toLocaleString()}</span>
-                </div>
-              ))}
-              <div style={{ fontSize: "1.2rem", fontWeight: "bold", marginTop: "10px", textAlign: "right", color: "#ff8c00" }}>
-                Total: ₦{Number(total).toLocaleString()}
+            <div className="bg-gray-50 p-6 rounded-2xl mb-8 border border-gray-100">
+              <h3 className="text-lg font-bold mb-4 text-gray-900 flex items-center gap-2">
+                Order Summary
+                <span className="text-xs bg-gray-200 px-2 py-0.5 rounded-full text-gray-600 uppercase tracking-widest">{cart.length} ITEMS</span>
+              </h3>
+              <div className="space-y-3">
+                {cart.map((item, index) => (
+                  <div key={index} className="flex justify-between items-center py-2 border-b border-gray-200 last:border-0">
+                    <span className="text-gray-600 font-medium">{item.name}</span>
+                    <span className="font-bold text-gray-900">NGN {Number(item.price).toLocaleString()}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 pt-4 border-t border-gray-300 flex justify-between items-center">
+                <span className="text-gray-900 font-black text-xl">Total</span>
+                <span className="text-2xl font-black text-orange-500">NGN {Number(total).toLocaleString()}</span>
               </div>
             </div>
 
-            <form onSubmit={handlePayment}>
-              <div style={{ marginBottom: "15px" }}>
-                <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Email</label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  style={{ width: "100%", padding: "12px", border: "1px solid #ddd", borderRadius: "6px" }}
-                />
+            <form onSubmit={handlePayment} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1.5">
+                  <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Full Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full px-5 py-3 rounded-xl border-2 border-gray-100 bg-gray-50 outline-none transition-all focus:border-orange-500 focus:bg-white text-gray-900 font-medium"
+                    placeholder="Jane Doe"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Email Address</label>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-5 py-3 rounded-xl border-2 border-gray-100 bg-gray-50 outline-none transition-all focus:border-orange-500 focus:bg-white text-gray-900 font-medium"
+                    placeholder="jane@example.com"
+                  />
+                </div>
               </div>
 
-              <div style={{ marginBottom: "15px" }}>
-                <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Name</label>
-                <input
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  style={{ width: "100%", padding: "12px", border: "1px solid #ddd", borderRadius: "6px" }}
-                />
-              </div>
-
-              <div style={{ marginBottom: "15px" }}>
-                <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Address</label>
+              <div className="space-y-1.5">
+                <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Shipping Address</label>
                 <input
                   type="text"
                   required
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  style={{ width: "100%", padding: "12px", border: "1px solid #ddd", borderRadius: "6px" }}
+                  className="w-full px-5 py-3 rounded-xl border-2 border-gray-100 bg-gray-50 outline-none transition-all focus:border-orange-500 focus:bg-white text-gray-900 font-medium"
+                  placeholder="123 Luxury Ave, Victoria Island, Lagos"
                 />
               </div>
 
-              <div style={{ marginBottom: "15px" }}>
-                <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Phone</label>
+              <div className="space-y-1.5">
+                <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Phone Number</label>
                 <input
                   type="tel"
                   required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  style={{ width: "100%", padding: "12px", border: "1px solid #ddd", borderRadius: "6px" }}
+                  className="w-full px-5 py-3 rounded-xl border-2 border-gray-100 bg-gray-50 outline-none transition-all focus:border-orange-500 focus:bg-white text-gray-900 font-medium"
+                  placeholder="+234 ..."
                 />
               </div>
 
-              <h3 style={{ marginTop: "20px", marginBottom: "10px" }}>Payment Details</h3>
-
-              <div style={{ marginBottom: "15px" }}>
-                <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Card Number</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="1234 5678 9012 3456"
-                  value={cardNumber}
-                  onChange={(e) => setCardNumber(e.target.value)}
-                  style={{ width: "100%", padding: "12px", border: "1px solid #ddd", borderRadius: "6px" }}
-                />
-              </div>
-
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px", marginBottom: "20px" }}>
-                <div>
-                  <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Expiry</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="MM/YY"
-                    value={cardExpiry}
-                    onChange={(e) => setCardExpiry(e.target.value)}
-                    style={{ width: "100%", padding: "12px", border: "1px solid #ddd", borderRadius: "6px" }}
-                  />
+              <div className="pt-6 border-t border-gray-100">
+                <h3 className="text-xl font-black mb-6 text-gray-900 tracking-tight">Payment Details</h3>
+                
+                <div className="space-y-1.5 mb-6">
+                  <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Card Number</label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      required
+                      placeholder="1234 5678 9012 3456"
+                      value={cardNumber}
+                      onChange={(e) => setCardNumber(e.target.value)}
+                      className="w-full px-5 py-3 rounded-xl border-2 border-gray-100 bg-gray-50 outline-none transition-all focus:border-orange-500 focus:bg-white text-gray-900 font-medium tracking-widest"
+                    />
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2">
+                       <span className="w-8 h-5 bg-blue-600 rounded-sm"></span>
+                       <span className="w-8 h-5 bg-red-500 rounded-sm"></span>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>CVV</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="123"
-                    value={cardCvv}
-                    onChange={(e) => setCardCvv(e.target.value)}
-                    style={{ width: "100%", padding: "12px", border: "1px solid #ddd", borderRadius: "6px" }}
-                  />
-                </div>
-              </div>
 
-              <button
-                type="submit"
-                disabled={processing}
-                style={{ width: "100%", padding: "12px", background: "#ff8c00", color: "white", border: "none", borderRadius: "6px", fontSize: "1rem", fontWeight: "bold", cursor: "pointer" }}
-              >
-                {processing ? "Processing..." : "Complete Payment"}
-              </button>
+                <div className="grid grid-cols-2 gap-6 mb-8">
+                  <div className="space-y-1.5">
+                    <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">Expiry (MM/YY)</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="MM/YY"
+                      value={cardExpiry}
+                      onChange={(e) => setCardExpiry(e.target.value)}
+                      className="w-full px-5 py-3 rounded-xl border-2 border-gray-100 bg-gray-50 outline-none transition-all focus:border-orange-500 focus:bg-white text-gray-900 font-medium"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">CVV</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="123"
+                      value={cardCvv}
+                      onChange={(e) => setCardCvv(e.target.value)}
+                      className="w-full px-5 py-3 rounded-xl border-2 border-gray-100 bg-gray-50 outline-none transition-all focus:border-orange-500 focus:bg-white text-gray-900 font-medium shadow-inner"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={processing}
+                  className="w-full py-4 bg-black text-white rounded-2xl font-black text-lg transition-all hover:bg-orange-500 shadow-2xl shadow-gray-200 active:scale-[0.98] disabled:bg-gray-400 disabled:cursor-not-allowed group"
+                >
+                  {processing ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <span className="w-5 h-5 border-3 border-white/20 border-t-white rounded-full animate-spin"></span>
+                      Processing...
+                    </span>
+                  ) : (
+                    "Complete Secure Payment"
+                  )}
+                </button>
+              </div>
             </form>
 
-            <div style={{ textAlign: "center", marginTop: "15px" }}>
-              <Link href="/" style={{ color: "#ff8c00", textDecoration: "none" }}>
-                ← Back to home
+            <div className="text-center mt-8">
+              <Link href="/" className="text-gray-400 font-bold hover:text-orange-500 transition-colors flex items-center justify-center gap-2 text-sm uppercase tracking-widest">
+                <span className="text-lg">←</span> Back to home
               </Link>
             </div>
           </>

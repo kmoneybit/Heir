@@ -3,36 +3,37 @@ import Link from "next/link";
 
 export default function SignupPage() {
   return (
-    <main style={{ padding: "120px 20px", background: "linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%)", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div style={{ maxWidth: "450px", width: "100%", background: "white", padding: "50px 40px", borderRadius: "16px", boxShadow: "0 10px 40px rgba(0, 0, 0, 0.08)" }}>
-        <h2 style={{ fontSize: "2rem", color: "#1a1a1a", marginBottom: "8px", fontWeight: 700, textAlign: "center" }}>Create Account</h2>
-        <p style={{ color: "#666", textAlign: "center", fontSize: "0.95rem", marginBottom: "32px", lineHeight: "1.5" }}>Join our community for exclusive offers</p>
+    <main className="pt-32 pb-20 px-5 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen flex items-center justify-center">
+      <div className="max-w-[450px] w-full bg-white p-10 md:p-14 rounded-3xl shadow-2xl shadow-gray-200/50 border border-gray-100/50 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-400 to-orange-600"></div>
+        <h2 className="text-4xl font-black text-gray-900 mb-2 text-center tracking-tight">Create Account</h2>
+        <p className="text-gray-500 text-center mb-10 leading-relaxed font-medium">Join our community for exclusive hair care offers</p>
 
-        <div style={{ marginBottom: "16px" }}>
-          <input
-            type="email"
-            placeholder="Email Address"
-            className="form-input"
-            style={{ display: "block", width: "100%", padding: "13px 16px", borderRadius: "10px", border: "2px solid #e0e0e0", fontSize: "1rem", background: "#fafafa" }}
-          />
-        </div>
-        <div style={{ marginBottom: "16px" }}>
-          <input
-            type="password"
-            placeholder="Password"
-            className="form-input"
-            style={{ display: "block", width: "100%", padding: "13px 16px", borderRadius: "10px", border: "2px solid #e0e0e0", fontSize: "1rem", background: "#fafafa" }}
-          />
-        </div>
+        <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+          <div className="space-y-1.5">
+            <label className="block text-xs font-bold text-gray-400 uppercase tracking-[0.2em] ml-1">Email Address</label>
+            <input
+              type="email"
+              placeholder="jane@example.com"
+              className="w-full px-6 py-4 rounded-2xl border-2 border-gray-100 bg-gray-50 outline-none transition-all focus:border-orange-500 focus:bg-white text-gray-900 font-medium shadow-inner"
+            />
+          </div>
+          <div className="space-y-1.5">
+            <label className="block text-xs font-bold text-gray-400 uppercase tracking-[0.2em] ml-1">Password</label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              className="w-full px-6 py-4 rounded-2xl border-2 border-gray-100 bg-gray-50 outline-none transition-all focus:border-orange-500 focus:bg-white text-gray-900 font-medium shadow-inner"
+            />
+          </div>
 
-        <button
-          style={{ background: "linear-gradient(135deg, #ff8c00 0%, #ff7700 100%)", padding: "13px 28px", border: "none", borderRadius: "10px", fontWeight: "bold", fontSize: "1rem", textTransform: "uppercase", letterSpacing: "0.5px", color: "white", width: "100%", cursor: "pointer", marginTop: "8px", boxShadow: "0 4px 15px rgba(255, 140, 0, 0.3)" }}
-        >
-          Create Account
-        </button>
+          <button className="w-full py-4 mt-4 bg-black text-white rounded-2xl font-black text-lg transition-all hover:bg-orange-500 shadow-xl shadow-gray-200 active:scale-[0.98] active:shadow-md">
+            Create Account
+          </button>
+        </form>
 
-        <p style={{ textAlign: "center", marginTop: "24px", color: "#666", fontSize: "0.95rem" }}>
-          Already have an account? <Link href="/login" style={{ color: "#ff8c00", textDecoration: "none", fontWeight: 600 }}>Sign in here</Link>
+        <p className="text-center mt-10 text-gray-500 font-medium">
+          Already have an account? <Link href="/login" className="text-orange-500 hover:text-orange-600 font-black decoration-2 underline-offset-4 hover:underline transition-all">Sign in here</Link>
         </p>
       </div>
     </main>
