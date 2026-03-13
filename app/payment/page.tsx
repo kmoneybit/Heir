@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Product } from "../context/CartContext";
+import { useAlert } from "../context/AlertContext";
 
 export default function PaymentPage() {
+  const { showAlert } = useAlert();
   const [cart, setCart] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
@@ -41,10 +43,10 @@ export default function PaymentPage() {
       await new Promise((resolve) => setTimeout(resolve, 1500));
       
       sessionStorage.removeItem("checkout_cart");
-      alert("Payment successful! Order ID: " + orderId);
+      showAlert("Payment successful! Order ID: " + orderId, "success");
       window.location.href = "/";
     } catch {
-      alert("Payment failed");
+      showAlert("Payment failed", "error");
       setProcessing(false);
     }
   };

@@ -3,14 +3,16 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../context/CartContext";
+import { useAlert } from "../context/AlertContext";
 
 export default function CartPage() {
   const { cart, removeFromCart } = useCart();
+  const { showAlert } = useAlert();
   const total = cart.reduce((acc, item) => acc + Number(item.price), 0);
 
   const handleCheckout = () => {
     if (cart.length === 0) {
-      alert("Your cart is empty");
+      showAlert("Your cart is empty", "warning");
       return;
     }
     sessionStorage.setItem("checkout_cart", JSON.stringify(cart));

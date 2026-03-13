@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
+import { AlertProvider } from "./context/AlertContext";
+import CustomAlert from "./components/CustomAlert";
 
 const bodyFont = Manrope({
   variable: "--font-body",
@@ -32,13 +34,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${bodyFont.variable} ${headingFont.variable} antialiased`}>
         <AuthProvider>
-          <CartProvider>
-            <div id="main-content">
-              <Header />
-              {children}
-              <Footer />
-            </div>
-          </CartProvider>
+          <AlertProvider>
+            <CartProvider>
+              <div id="main-content">
+                <Header />
+                {children}
+                <Footer />
+              </div>
+              <CustomAlert />
+            </CartProvider>
+          </AlertProvider>
         </AuthProvider>
       </body>
     </html>

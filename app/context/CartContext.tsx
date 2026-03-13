@@ -1,5 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useAlert } from './AlertContext';
 
 export type Product = {
   id: string | number;
@@ -20,6 +21,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<Product[]>([]);
   const [mounted, setMounted] = useState(false);
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -34,7 +36,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const newCart = [...cart, product];
     setCart(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));
-    alert(product.name + " added to cart");
+    showAlert(product.name + " added to cart", "success");
   };
 
   const removeFromCart = (index: number) => {

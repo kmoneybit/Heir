@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { Product } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import { useAlert } from "../context/AlertContext";
 import { useRouter } from "next/navigation";
 
 export default function AdminPage() {
   const { user, loading } = useAuth();
+  const { showAlert } = useAlert();
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [name, setName] = useState("");
@@ -45,7 +47,7 @@ export default function AdminPage() {
 
   const handleCreate = async () => {
     if (!name || !price) {
-      alert("Name and Price are required.");
+      showAlert("Name and Price are required.", "warning");
       return;
     }
 
@@ -69,8 +71,9 @@ export default function AdminPage() {
         setImage("");
         setColors("");
         loadProducts();
+        showAlert("Product created successfully", "success");
       } else {
-        alert("Failed to create product");
+        showAlert("Failed to create product", "error");
       }
     } catch (e) {
       console.error(e);
@@ -82,8 +85,9 @@ export default function AdminPage() {
       const res = await fetch(`/api/products/${id}`, { method: "DELETE" });
       if (res.ok) {
         loadProducts();
+        showAlert("Product deleted successfully", "success");
       } else {
-        alert("Failed to delete product");
+        showAlert("Failed to delete product", "error");
       }
     } catch (e) {
       console.error(e);
