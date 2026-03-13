@@ -59,7 +59,7 @@ export default function Home() {
             Your Hair, Your Statement
           </span>
 
-          <h1 className="text-[2.5rem] md:text-[5.5rem] leading-[1.1] font-black text-white mb-8 tracking-[-0.03em] opacity-0 translate-y-8 animate-[fadeUp_1s_0.2s_ease_forwards]">
+          <h1 className="text-[2rem] md:text-[4rem] leading-[1.1] font-black text-white mb-8 tracking-[-0.03em] opacity-0 translate-y-8 animate-[fadeUp_1s_0.2s_ease_forwards]">
             Make a bold look with <br className="hidden md:block" />
             your attractive hair style!
           </h1>
