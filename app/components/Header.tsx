@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { cart } = useCart();
+  const { user, logout } = useAuth();
 
   return (
     <>
@@ -73,13 +75,32 @@ export default function Header() {
 
           {/* Right Utilities */}
           <div className="flex items-center gap-5 md:gap-7">
-            <Link href="/login" className="hidden md:flex items-center justify-center text-gray-700 hover:text-black transition-colors">
-              <span className="sr-only">Account</span>
-              <svg viewBox="0 0 24 24" className="w-[22px] h-[22px]" fill="none" stroke="currentColor" strokeWidth="1.8">
-                <path d="M20 21a8 8 0 1 0-16 0" />
-                <circle cx="12" cy="8" r="4" />
-              </svg>
-            </Link>
+            {user ? (
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={logout}
+                  className="text-[11px] font-black uppercase tracking-widest text-gray-400 hover:text-orange-500 transition-colors hidden md:block"
+                >
+                  Logout
+                </button>
+                <div className="hidden md:flex items-center justify-center text-gray-700">
+                  <span className="sr-only">Account</span>
+                  <svg viewBox="0 0 24 24" className="w-[22px] h-[22px]" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M20 21a8 8 0 1 0-16 0" />
+                    <circle cx="12" cy="8" r="4" />
+                  </svg>
+                </div>
+              </div>
+            ) : (
+              <Link href="/login" className="hidden md:flex items-center justify-center text-gray-700 hover:text-black transition-colors">
+                <span className="sr-only">Account</span>
+                <svg viewBox="0 0 24 24" className="w-[22px] h-[22px]" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M20 21a8 8 0 1 0-16 0" />
+                  <circle cx="12" cy="8" r="4" />
+                </svg>
+              </Link>
+            )}
+            
             <Link href="/cart" className="relative group text-gray-700 hover:text-black transition-colors">
               <span className="sr-only">Cart</span>
               <svg viewBox="0 0 24 24" className="w-[22px] h-[22px]" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -130,9 +151,18 @@ export default function Header() {
             <Link href="/contact" onClick={() => setMenuOpen(false)} className="text-lg font-bold text-gray-900">
               Contact
             </Link>
-            <Link href="/login" onClick={() => setMenuOpen(false)} className="text-lg font-bold text-orange-500">
-              Account
-            </Link>
+            {user ? (
+               <button 
+               onClick={() => { logout(); setMenuOpen(false); }}
+               className="text-lg font-bold text-red-500"
+             >
+               Logout
+             </button>
+            ) : (
+              <Link href="/login" onClick={() => setMenuOpen(false)} className="text-lg font-bold text-orange-500">
+                Account
+              </Link>
+            )}
           </nav>
         </div>
       </header>

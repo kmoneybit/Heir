@@ -1,8 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Product } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function AdminPage() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -20,9 +24,24 @@ export default function AdminPage() {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadProducts();
-  }, []);
+    if (!loading && !user) {
+      router.push("/login");
+    }
+  }, [user, loading, router]);
+
+  useEffect(() => {
+    if (user) {
+      loadProducts();
+    }
+  }, [user]);
+
+  if (loading || !user) {
+    return (
+      <div className="pt-40 flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+      </div>
+    );
+  }
 
   const handleCreate = async () => {
     if (!name || !price) {
@@ -34,7 +53,7 @@ export default function AdminPage() {
       name,
       price: Number(price),
       image,
-      colors: colors.split(",").map((c) => c.trim()).filter(Boolean),
+      colors: colors.split(",").map((c: string) => c.trim()).filter(Boolean),
     };
 
     try {
@@ -132,7 +151,7 @@ export default function AdminPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 font-medium text-gray-700">
-            {products.map((p) => (
+            {products.map((p: Product) => (
               <tr key={p.id} className="transition-colors hover:bg-gray-50/50">
                 <td className="p-5 text-gray-400 font-mono text-sm">#{p.id}</td>
                 <td className="p-5">
@@ -147,7 +166,7 @@ export default function AdminPage() {
                 <td className="p-5 font-black text-gray-800 tracking-tight">NGN {Number(p.price).toLocaleString()}</td>
                 <td className="p-5">
                    <div className="flex gap-1.5 flex-wrap">
-                      {p.colors?.map((c, i) => (
+                      {p.colors?.map((c: string, i: number) => (
                          <span key={i} className="w-4 h-4 rounded-full border border-gray-200 shadow-sm" style={{ backgroundColor: c }}></span>
                       ))}
                       {(!p.colors || p.colors.length === 0) && <span className="text-gray-400 italic text-sm">None</span>}

@@ -46,11 +46,11 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="relative min-h-screen bg-[#0b0b0f] text-white flex justify-center items-center overflow-hidden">
         {/* Background Image with optimized blend */}
-        <div 
+        <div
           className="absolute inset-0 z-0 bg-center bg-cover bg-no-repeat opacity-30 grayscale-[35%]"
           style={{ backgroundImage: "url('/image/hero-image.jpg')" }}
         ></div>
-        
+
         {/* Subtle Overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/80 z-0"></div>
 
@@ -58,26 +58,26 @@ export default function Home() {
           <span className="text-[11px] md:text-xs font-black uppercase tracking-[0.3em] text-white/60 mb-6 opacity-0 translate-y-4 animate-[fadeUp_0.8s_ease_forwards]">
             Your Hair, Your Statement
           </span>
-          
+
           <h1 className="text-[2.5rem] md:text-[5.5rem] leading-[1.1] font-black text-white mb-8 tracking-[-0.03em] opacity-0 translate-y-8 animate-[fadeUp_1s_0.2s_ease_forwards]">
             Make a bold look with <br className="hidden md:block" />
             your attractive hair style!
           </h1>
-          
+
           <p className="text-base md:text-xl text-white/70 max-w-2xl leading-relaxed mb-12 opacity-0 translate-y-8 animate-[fadeUp_1s_0.4s_ease_forwards] font-medium">
-            Discover premium hair designed to match your style, boost your 
+            Discover premium hair designed to match your style, boost your
             confidence, and let you express yourself effortlessly.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 mb-14 opacity-0 translate-y-8 animate-[fadeUp_1s_0.6s_ease_forwards]">
-            <Link 
-              className="px-10 py-5 bg-[#d78455] text-black rounded-2xl no-underline font-black text-lg shadow-xl shadow-black/30 hover:bg-[#c06a3b] transition-all hover:-translate-y-1 active:scale-95" 
+            <Link
+              className="px-10 py-5 bg-[#d78455] text-black rounded-2xl no-underline font-black text-lg shadow-xl shadow-black/30 hover:bg-[#c06a3b] transition-all hover:-translate-y-1 active:scale-95"
               href="/shop"
             >
               Classic Collection
             </Link>
-            <Link 
-              className="px-10 py-5 bg-white/10 text-white rounded-2xl no-underline font-black text-lg border border-white/20 shadow-xl shadow-black/30 hover:bg-white/20 transition-all hover:-translate-y-1 active:scale-95" 
+            <Link
+              className="px-10 py-5 bg-white/10 text-white rounded-2xl no-underline font-black text-lg border border-white/20 shadow-xl shadow-black/30 hover:bg-white/20 transition-all hover:-translate-y-1 active:scale-95"
               href="/shop"
             >
               Luxury Collection
@@ -96,12 +96,12 @@ export default function Home() {
               </div>
               <p className="text-xs font-bold text-white/60 uppercase tracking-widest px-1">Trusted by 4k+ Clients</p>
             </div>
-            
+
             <div className="flex -space-x-4">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="w-14 h-14 rounded-full border-4 border-white/40 overflow-hidden shadow-lg shadow-black/40">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={`https://i.pravatar.cc/150?u=${i+10}`} alt="User" className="w-full h-full object-cover" />
+                  <img src={`https://i.pravatar.cc/150?u=${i + 10}`} alt="User" className="w-full h-full object-cover" />
                 </div>
               ))}
               <div className="w-14 h-14 rounded-full border-4 border-white/40 bg-black flex items-center justify-center text-white text-[10px] font-black shadow-lg shadow-black/40">
@@ -153,7 +153,7 @@ export default function Home() {
       <section className="py-32 px-6 bg-black text-white text-center relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-500/10 rounded-full -ml-32 -mb-32 blur-3xl"></div>
-        
+
         <div className="max-w-4xl mx-auto relative z-10">
           <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tight">Ready for a new look?</h2>
           <p className="text-xl md:text-2xl mb-12 text-gray-400 leading-relaxed">Join thousands of women who trust Thaniablaq for their premium hair needs.</p>
