@@ -1,7 +1,8 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getAnalytics, isSupported } from "firebase/analytics";
 
-// These values should ideally come from .env.local
+// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDbj3owcSFn6LM3_MlVN8SORgGlpgesyls",
   authDomain: "thaniablaq-hair.firebaseapp.com",
@@ -15,5 +16,13 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+// Initialize Analytics safely (it only works in the browser)
+export const initAnalytics = async () => {
+  if (typeof window !== "undefined" && await isSupported()) {
+    return getAnalytics(app);
+  }
+  return null;
+};
 
 export { auth };

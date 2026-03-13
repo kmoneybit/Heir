@@ -44,7 +44,7 @@ export default function Home() {
   return (
     <main className="overflow-x-hidden">
       {/* HERO SECTION */}
-      <section className="relative min-h-screen bg-[#0b0b0f] text-white flex justify-center items-center overflow-hidden">
+      <section className="relative min-h-[120vh] bg-[#0b0b0f] text-white flex justify-center items-center overflow-hidden py-32">
         {/* Background Image with optimized blend */}
         <div
           className="absolute inset-0 z-0 bg-center bg-cover bg-no-repeat opacity-30 grayscale-[35%]"

@@ -83,16 +83,16 @@ export default function Header() {
                 >
                   Logout
                 </button>
-                <div className="hidden md:flex items-center justify-center text-gray-700">
+                <Link href="/profile" className="hidden md:flex items-center justify-center text-gray-700 hover:text-orange-500 transition-colors">
                   <span className="sr-only">Account</span>
                   <svg viewBox="0 0 24 24" className="w-[22px] h-[22px]" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M20 21a8 8 0 1 0-16 0" />
                     <circle cx="12" cy="8" r="4" />
                   </svg>
-                </div>
+                </Link>
               </div>
             ) : (
-              <Link href="/login" className="hidden md:flex items-center justify-center text-gray-700 hover:text-black transition-colors">
+              <Link href="/login" className="hidden md:flex items-center justify-center text-gray-700 hover:text-black transition-colors text-inherit no-underline">
                 <span className="sr-only">Account</span>
                 <svg viewBox="0 0 24 24" className="w-[22px] h-[22px]" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M20 21a8 8 0 1 0-16 0" />
