@@ -92,9 +92,9 @@ export default function Home() {
                 <svg viewBox="0 0 24 24" className="w-5 h-5 text-amber-400" fill="currentColor" aria-hidden="true">
                   <path d="M12 3.5l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17.7 6.6 20.3l1-6.1-4.4-4.3 6.1-.9L12 3.5z" />
                 </svg>
-                <span className="text-lg font-black text-white">5.0</span>
+                <span className="text-lg font-black text-white">4.0</span>
               </div>
-              <p className="text-xs font-bold text-white/60 uppercase tracking-widest px-1">Trusted by 4k+ Clients</p>
+              <p className="text-xs font-bold text-white/60 uppercase tracking-widest px-1">Trusted by 1k+ Clients</p>
             </div>
 
             <div className="flex -space-x-4">
@@ -105,7 +105,7 @@ export default function Home() {
                 </div>
               ))}
               <div className="w-14 h-14 rounded-full border-4 border-white/40 bg-black flex items-center justify-center text-white text-[10px] font-black shadow-lg shadow-black/40">
-                +4k
+                +1k
               </div>
             </div>
           </div>
