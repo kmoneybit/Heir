@@ -54,6 +54,12 @@ export default function Header() {
               Home
             </Link>
             <Link
+              href="/admin"
+              className="text-[13px] font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors"
+            >
+              Admin
+            </Link>
+            <Link
               href="/shop"
               className="text-[13px] font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors"
             >
@@ -141,6 +147,9 @@ export default function Header() {
           <nav className="flex flex-col items-center gap-6">
             <Link href="/" onClick={() => setMenuOpen(false)} className="text-lg font-bold text-gray-900">
               Home
+            </Link>
+            <Link href="/admin" onClick={() => setMenuOpen(false)} className="text-lg font-bold text-gray-900">
+              Admin
             </Link>
             <Link href="/shop" onClick={() => setMenuOpen(false)} className="text-lg font-bold text-gray-900">
               Shop
